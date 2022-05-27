@@ -35,10 +35,10 @@ public class Credentials {
 	private String password;
 	
 	@Column(nullable = false)
-	private String role;
+	private String ruolo;
 	
 	public Credentials() {
-		role = DEFAULT_ROLE;
+		ruolo = DEFAULT_ROLE;
 	}
 
 }

@@ -22,7 +22,7 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 	DataSource datasource;
 	
 	/**
-	 * Provides the authorization and authentication configurations
+	 * Fornisce le configurazioni di autenticazione ed autorizzazione
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -47,7 +47,7 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	/**
-	 * Provides the SQL queries to get username and password.
+	 * Fornisce le query SQL per ottenere username e password
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -60,7 +60,7 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	/**
-	 * Defines a Bean used to encrypt and decrypt the Credentials passwords.
+	 * Definisce un Bean usato per criptare e decriptare le password di Credentials
 	 */
 	@Bean
 	PasswordEncoder passwordEncoder() {
