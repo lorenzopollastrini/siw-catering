@@ -3,6 +3,8 @@ package it.uniroma3.siw.siwcatering.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,10 +44,13 @@ public class AuthenticationController {
 			Model model) {
 		
 		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+			
 			credentials.setUser(user);
 			credentials.setPassword(passwordEncoder.encode(credentials.getPassword()));
 			credentialsService.save(credentials);
-			return "registration-successful";
+			
+			return "redirect:/login";
+			
 		}
 		
 		return "register";
@@ -59,6 +64,16 @@ public class AuthenticationController {
 	
 	@GetMapping("/default")
 	public String defaultAfterLogin(Model model) {
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.findByUsername(userDetails.getUsername());
+		
+		System.out.println(credentials.getRole());
+		
+		if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+			return "redirect:/admin";
+		}
+		
 		return "redirect:/";
 	}
 	

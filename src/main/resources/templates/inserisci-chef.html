@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Inserisci chef</title>
+</head>
+
+<body>
+	<h1>Inserisci chef</h1>
+	<form th:action="@{/admin/chef}" method="post" th:object="${chef}">
+		<div>
+			<input type="text" th:field="*{nome}" placeholder="Nome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{cognome}" placeholder="Cognome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{nazione}" placeholder="Nazione" />
+		</div>
+		<input type="submit" value="Inserisci" />
+	</form>
+</body>
+
+</html>

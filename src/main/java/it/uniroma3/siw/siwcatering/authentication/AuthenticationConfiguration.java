@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static it.uniroma3.siw.siwcatering.model.Credentials.ADMIN_ROLE;;
+
 @Configuration
 @EnableWebSecurity
 public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
@@ -30,11 +32,13 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests() // Authorization paragraph
 			.antMatchers(HttpMethod.GET, "/login", "/register", "/css/**", "/images/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+			.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+			.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 			.anyRequest().authenticated()
 			
 			.and().formLogin() // Login paragraph
 			.loginPage("/login")
-			.defaultSuccessUrl("/default")
+			.defaultSuccessUrl("/default", true)
 			
 			.and().logout() // Logout paragraph
 			.logoutUrl("/logout")

@@ -1,5 +1,6 @@
 package it.uniroma3.siw.siwcatering.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -27,5 +28,9 @@ public class Chef {
 	
 	@OneToMany(mappedBy = "chef")
 	private Collection<Buffet> buffet;
+	
+	public Chef() {
+		buffet = new ArrayList<>();
+	}
 	
 }

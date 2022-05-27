@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Admin Home</title>
+</head>
+
+<body>
+	<h1>Admin Home</h1>	
+	<main>
+		<section>
+			<h2>Chef</h2>
+			<a th:href="@{/admin/inserisci-chef}">Inserisci chef</a>
+			<ul>
+				Elenco chef
+				<li th:each="chef : ${chefs}">
+					<span th:text="${chef.cognome + ', ' + chef.nome}"></span>
+				</li>
+			</ul>	
+		</section>
+	</main>
+</body>
+
+</html>
