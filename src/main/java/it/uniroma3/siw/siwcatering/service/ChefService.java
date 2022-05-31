@@ -31,5 +31,13 @@ public class ChefService {
 		return result;
 		
 	}
+	
+	public Chef findById(Long id) {
+		return chefRepository.findById(id).get();
+	}
+	
+	public void deleteById(Long id) {
+		chefRepository.deleteById(id);
+	}
 
 }

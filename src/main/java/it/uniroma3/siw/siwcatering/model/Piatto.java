@@ -26,5 +26,13 @@ public class Piatto {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Ingrediente> ingredienti;
+	
+	public void addIngrediente(Ingrediente ingrediente) {
+		ingredienti.add(ingrediente);
+	}
+	
+	public void removeIngrediente(Ingrediente ingrediente) {
+		ingredienti.remove(ingrediente);
+	}
 
 }

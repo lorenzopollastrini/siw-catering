@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Modifica chef</title>
+</head>
+
+<body>
+	<h1>Modifica chef</h1>
+	<form th:action="@{'/admin/chef/' + ${chef.id} + '/modifica'}" method="post" th:object="${chef}">
+		<div>
+			<input type="text" th:field="*{nome}" placeholder="Nome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{cognome}" placeholder="Cognome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{nazione}" placeholder="Nazione" />
+		</div>
+		<input type="submit" value="Inserisci" />
+		<input type="hidden" th:field="*{id}" />
+		<input type="hidden" th:field="*{buffet}" />
+	</form>
+</body>
+
+</html>

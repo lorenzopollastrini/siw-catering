@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Piatto (admin)</title>
+</head>
+
+<body>
+	<main>
+		<h1 th:text="'Piatto: ' + ${piatto.nome} + ' (Admin)'"></h1>
+		<section>
+			<h4>Ingredienti</h4>
+			<ul>
+				<li th:each="ingrediente : ${piatto.ingredienti}">
+					<span th:text="${ingrediente.nome}"></span>
+					<a th:href="@{'/admin/ingrediente/' + ${ingrediente.id} + '/modifica'}">Modifica generalità</a>
+					<a th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/' + ${ingrediente.id} + '/cancella'}">Cancella</a>
+				</li>
+			</ul>
+		</section>
+	</main>
+</body>
+
+</html>

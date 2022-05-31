@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Modifica piatto</title>
+</head>
+
+<body>
+	<h1>Modifica piatto</h1>
+	<form th:action="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}" method="post" th:object="${piatto}">
+		<div>
+			<input type="text" th:field="*{nome}" placeholder="Nome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{descrizione}" placeholder="Descrizione" />
+		</div>
+		<input type="submit" value="Salva modifiche" />
+		<input type="hidden" th:field="*{id}" />
+		<input type="hidden" th:field="*{ingredienti}" />
+	</form>
+</body>
+
+</html>

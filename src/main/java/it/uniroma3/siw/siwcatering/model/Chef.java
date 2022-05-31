@@ -33,4 +33,12 @@ public class Chef {
 		buffet = new ArrayList<>();
 	}
 	
+	public void addBuffet(Buffet buffet) {
+		this.buffet.add(buffet);
+	}
+	
+	public void removeBuffet(Buffet buffet) {
+		this.buffet.remove(buffet);
+	}
+	
 }

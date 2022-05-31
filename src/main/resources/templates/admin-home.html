@@ -15,7 +15,10 @@
 			<ul>
 				Elenco chef
 				<li th:each="chef : ${chefs}">
-					<span th:text="${chef.cognome + ', ' + chef.nome}"></span>
+					<a th:href="@{'/admin/chef/' + ${chef.id}}" th:text="${chef.cognome + ', ' + chef.nome}"></a>
+					<a th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica generalità</a>
+					<a th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi buffet</a>
+					<a th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
 				</li>
 			</ul>	
 		</section>

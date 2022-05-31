@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Inserisci piatto</title>
+</head>
+
+<body>
+	<h1>Inserisci piatto</h1>
+	<form th:action="@{'/admin/buffet/' + ${buffet.id} + '/piatto'}" method="post" th:object="${piatto}">
+		<div>
+			<input type="text" th:field="*{nome}" placeholder="Nome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{descrizione}" placeholder="Descrizione" />
+		</div>
+		<input type="submit" value="Inserisci" />
+	</form>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Inserisci ingrediente</title>
+</head>
+
+<body>
+	<h1>Inserisci ingrediente</h1>
+	<form th:action="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente'}" method="post" th:object="${ingrediente}">
+		<div>
+			<input type="text" th:field="*{nome}" placeholder="Nome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{descrizione}" placeholder="Descrizione" />
+		</div>
+		<div>
+			<input type="text" th:field="*{origine}" placeholder="Origine" />
+		</div>
+		<input type="submit" value="Inserisci" />
+	</form>
+</body>
+
+</html>

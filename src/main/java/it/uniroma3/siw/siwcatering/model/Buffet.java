@@ -31,4 +31,12 @@ public class Buffet {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Piatto> piatti;
 	
+	public void addPiatto(Piatto piatto) {
+		piatti.add(piatto);
+	}
+	
+	public void removePiatto(Piatto piatto) {
+		piatti.remove(piatto);
+	}
+	
 }

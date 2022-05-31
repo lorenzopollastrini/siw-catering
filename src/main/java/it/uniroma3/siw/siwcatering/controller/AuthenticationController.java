@@ -67,14 +67,13 @@ public class AuthenticationController {
 		
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.findByUsername(userDetails.getUsername());
-		
-		System.out.println(credentials.getRole());
-		
+				
 		if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
 			return "redirect:/admin";
 		}
 		
 		return "redirect:/";
+		
 	}
 	
 }

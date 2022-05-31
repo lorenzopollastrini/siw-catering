@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Modifica buffet</title>
+</head>
+
+<body>
+	<h1>Modifica buffet</h1>
+	<form th:action="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}" method="post" th:object="${buffet}">
+		<div>
+			<input type="text" th:field="*{nome}" placeholder="Nome" />
+		</div>
+		<div>
+			<input type="text" th:field="*{descrizione}" placeholder="Descrizione" />
+		</div>
+		<input type="submit" value="Salva modifiche" />
+		<input type="hidden" th:field="*{id}" />
+		<input type="hidden" th:field="*{chef}" />
+		<input type="hidden" th:field="*{piatti}" />
+	</form>
+</body>
+
+</html>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.siwcatering.model.Chef;
@@ -20,7 +21,7 @@ public class ChefController {
 	private ChefService chefService;
 
 	@GetMapping("/admin/inserisci-chef")
-	public String getInserisciChefForm(Model model) {
+	public String getInserisciChefView(Model model) {
 		
 		model.addAttribute("chef", new Chef());
 		
@@ -38,6 +39,36 @@ public class ChefController {
 		}
 		
 		return "inserisci-chef";
+	}
+	
+	@GetMapping("/admin/chef/{chefId}/modifica")
+	public String getModificaChefView(@PathVariable("chefId") Long chefId,
+			Model model) {
+		
+		model.addAttribute("chef", chefService.findById(chefId));
+		
+		return "modifica-chef";
+		
+	}
+	
+	@PostMapping("/admin/chef/{chefId}/modifica")
+	public String updateChef(@Valid @ModelAttribute("chef") Chef chef,
+			BindingResult chefBindingResult) {
+		
+		if (!chefBindingResult.hasErrors()) {
+			chefService.save(chef);
+		}
+		
+		return "redirect:/admin";
+	}
+	
+	@GetMapping("/admin/chef/{chefId}/cancella")
+	public String deleteChef(@PathVariable("chefId") Long chefId) {
+		
+		chefService.deleteById(chefId);
+		
+		return "redirect:/admin";
+		
 	}
 	
 }
