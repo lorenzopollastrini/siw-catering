@@ -7,7 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,8 @@ public class Piatto {
 	
 	private String descrizione;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "piatto_id")
 	private Collection<Ingrediente> ingredienti;
 	
 	public void addIngrediente(Ingrediente ingrediente) {

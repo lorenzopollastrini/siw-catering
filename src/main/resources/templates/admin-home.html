@@ -1,28 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta charset="UTF-8" />
-	<title>Admin Home</title>
-</head>
+<head th:replace="fragments/base :: head(title='Admin Home')"></head>
 
 <body>
-	<h1>Admin Home</h1>	
-	<main>
-		<section>
-			<h2>Chef</h2>
-			<a th:href="@{/admin/inserisci-chef}">Inserisci chef</a>
-			<ul>
-				Elenco chef
-				<li th:each="chef : ${chefs}">
-					<a th:href="@{'/admin/chef/' + ${chef.id}}" th:text="${chef.cognome + ', ' + chef.nome}"></a>
-					<a th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica generalità</a>
-					<a th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi buffet</a>
-					<a th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
-				</li>
-			</ul>	
-		</section>
-	</main>
+		
+	<div th:replace="fragments/base :: header"></div>
+	
+	<div th:replace="fragments/base :: main(page='fragments/admin-home-content', fragment='content')"></div>
+	
+	<div th:replace="fragments/base :: scripts"></div>
+	
 </body>
 
 </html>

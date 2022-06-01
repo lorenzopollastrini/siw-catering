@@ -37,8 +37,12 @@ public class MainController {
 	public String adminHome(Model model) {
 		
 		Collection<Chef> chefs = chefService.findAll();
+		Collection<Buffet> buffets = buffetService.findAll();
+		Collection<Piatto> piatti = piattoService.findAll();
 		
 		model.addAttribute("chefs", chefs);
+		model.addAttribute("buffets", buffets);
+		model.addAttribute("piatti", piatti);
 		
 		return "admin-home";
 		

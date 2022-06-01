@@ -78,15 +78,10 @@ public class PiattoController {
 		
 	}
 	
-	@GetMapping("/admin/buffet/{buffetId}/piatto/{piattoId}/cancella")
-	public String cancellaPiatto(@PathVariable("buffetId") Long buffetId,
-			@PathVariable("piattoId") Long piattoId) {
+	@GetMapping("/admin/piatto/{piattoId}/cancella")
+	public String cancellaPiatto(@PathVariable("piattoId") Long piattoId) {
 		
 		Piatto piatto = piattoService.findById(piattoId);
-		Buffet buffet = buffetService.findById(buffetId);
-		
-		buffet.removePiatto(piatto);
-		buffetService.save(buffet);
 		
 		piattoService.delete(piatto);
 		
