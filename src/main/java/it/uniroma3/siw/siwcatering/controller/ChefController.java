@@ -1,5 +1,7 @@
 package it.uniroma3.siw.siwcatering.controller;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,29 @@ public class ChefController {
 	@Autowired
 	private ChefService chefService;
 
+	@GetMapping("/chef")
+	public String getElencoChef(Model model) {
+		
+		Collection<Chef> chefs = chefService.findAll();
+		
+		model.addAttribute("chefs", chefs);
+		
+		return "elenco-chef";
+		
+	}
+	
+	@GetMapping("/chef/{chefId}")
+	public String getChef(@PathVariable("chefId") Long chefId,
+			Model model) {
+		
+		Chef chef = chefService.findById(chefId);
+		
+		model.addAttribute("chef", chef);
+		
+		return "dettagli-chef";
+		
+	}
+	
 	@GetMapping("/admin/inserisci-chef")
 	public String getInserisciChefView(Model model) {
 		
