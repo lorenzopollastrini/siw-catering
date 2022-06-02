@@ -25,6 +25,25 @@ public class BuffetController {
 	@Autowired
 	private ChefService chefService;
 	
+	@GetMapping("/buffet")
+	public String getElencoBuffet(Model model) {
+		
+		model.addAttribute("buffets", buffetService.findAll());
+		
+		return "elenco-buffet";
+		
+	}
+	
+	@GetMapping("/buffet/{buffetId}")
+	public String getBuffet(@PathVariable("buffetId") Long buffetId,
+			Model model) {
+		
+		model.addAttribute("buffet", buffetService.findById(buffetId));
+		
+		return "dettagli-buffet";
+		
+	}
+	
 	@GetMapping("/admin/chef/{chefId}/buffet/nuovo")
 	public String getInserisciBuffetView(@PathVariable("chefId") Long chefId,
 			Model model) {

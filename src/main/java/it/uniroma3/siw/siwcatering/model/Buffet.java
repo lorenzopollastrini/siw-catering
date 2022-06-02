@@ -29,8 +29,8 @@ public class Buffet {
 	
 	private String descrizione;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "buffet_id")
+	@OneToMany(mappedBy = "buffet", fetch = FetchType.EAGER)
+	//@JoinColumn(name = "buffet_id")
 	private Collection<Piatto> piatti;
 	
 	public void addPiatto(Piatto piatto) {

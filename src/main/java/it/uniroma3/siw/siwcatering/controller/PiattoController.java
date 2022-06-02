@@ -25,6 +25,25 @@ public class PiattoController {
 	@Autowired
 	private BuffetService buffetService;
 	
+	@GetMapping("/piatto")
+	public String getElencoPiatti(Model model) {
+		
+		model.addAttribute("piatti", piattoService.findAll());
+		
+		return "elenco-piatti";
+		
+	}
+	
+	@GetMapping("/piatto/{piattoId}")
+	public String getPiatto(@PathVariable("piattoId") Long piattoId,
+			Model model) {
+		
+		model.addAttribute("piatto", piattoService.findById(piattoId));
+		
+		return "dettagli-piatto";
+		
+	}
+	
 	@GetMapping("/admin/buffet/{buffetId}/piatto/nuovo")
 	public String getInserisciPiattoView(@PathVariable("buffetId") Long buffetId,
 			Model model) {
@@ -45,6 +64,7 @@ public class PiattoController {
 			
 			Buffet buffet = buffetService.findById(buffetId);
 			
+			piatto.setBuffet(buffet);
 			Piatto savedPiatto = piattoService.save(piatto);
 			
 			buffet.addPiatto(savedPiatto);

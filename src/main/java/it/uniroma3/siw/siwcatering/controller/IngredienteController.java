@@ -78,15 +78,10 @@ public class IngredienteController {
 		
 	}
 	
-	@GetMapping("/admin/piatto/{piattoId}/ingrediente/{ingredienteId}/cancella")
-	public String cancellaIngrediente(@PathVariable("piattoId") Long piattoId,
-			@PathVariable("ingredienteId") Long ingredienteId) {
+	@GetMapping("/admin/ingrediente/{ingredienteId}/cancella")
+	public String cancellaIngrediente(@PathVariable("ingredienteId") Long ingredienteId) {
 		
 		Ingrediente ingrediente = ingredienteService.findById(ingredienteId);
-		Piatto piatto = piattoService.findById(piattoId);
-		
-		piatto.removeIngrediente(ingrediente);
-		piattoService.save(piatto);
 		
 		ingredienteService.delete(ingrediente);
 		
