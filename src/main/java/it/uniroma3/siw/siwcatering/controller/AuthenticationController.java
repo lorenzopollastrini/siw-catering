@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.siwcatering.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.siwcatering.model.Credentials;
 import it.uniroma3.siw.siwcatering.model.User;
 import it.uniroma3.siw.siwcatering.service.CredentialsService;
@@ -22,6 +23,9 @@ public class AuthenticationController {
 
 	@Autowired
 	CredentialsService credentialsService;
+	
+	@Autowired
+	CredentialsValidator credentialsValidator;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -41,6 +45,8 @@ public class AuthenticationController {
 			BindingResult userBindingResult,
 			@Valid @ModelAttribute("credentials") Credentials credentials,
 			BindingResult credentialsBindingResult) {
+		
+		credentialsValidator.validate(credentials, credentialsBindingResult);
 		
 		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			
