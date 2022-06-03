@@ -4,7 +4,7 @@
 <head th:replace="fragments/base :: head(title='Buffet')"></head>
 
 <body>
-		
+
 	<div th:replace="fragments/base :: header"></div>
 
 	<main class="row m-3">
@@ -18,17 +18,19 @@
 							<!-- TODO: icona -->
 							<span th:text="${buffet.nome}"></span>
 						</div>
-						<span class="badge bg-primary rounded-pill"
+						<span th:if="${#lists.size(buffet.piatti) == 1}" class="badge bg-primary rounded-pill"
+							th:text="${#lists.size(buffet.piatti) + ' piatto'}"></span>
+						<span th:if="${#lists.size(buffet.piatti) != 1}" class="badge bg-primary rounded-pill"
 							th:text="${#lists.size(buffet.piatti) + ' piatti'}"></span>
 					</div>
 				</a>
 			</div>
 		</div>
 		<div id="main-right" class="col-2"></div>
-	</main>	
-	
+	</main>
+
 	<div th:replace="fragments/base :: scripts"></div>
-	
+
 </body>
 
 </html>
