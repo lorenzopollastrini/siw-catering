@@ -56,13 +56,14 @@ public class BuffetController {
 	}
 	
 	@PostMapping("/admin/chef/{chefId}/buffet")
-	public String inserisciBuffet(@Valid @ModelAttribute("buffet") Buffet buffet,
+	public String createBuffet(@Valid @ModelAttribute("buffet") Buffet buffet,
 			BindingResult buffetBindingResult,
-			@PathVariable("chefId") Long chefId) {
+			@PathVariable("chefId") Long chefId,
+			Model model) {
+		
+		Chef chef = chefService.findById(chefId);
 		
 		if (!buffetBindingResult.hasErrors()) {
-			
-			Chef chef = chefService.findById(chefId);
 			
 			buffet.setChef(chef);
 			
@@ -71,9 +72,13 @@ public class BuffetController {
 			chef.addBuffet(savedBuffet);
 			chefService.save(chef);
 			
+			return "redirect:/admin";
+			
 		}
 		
-		return "redirect:/admin";
+		model.addAttribute("chef", chef);
+		
+		return "inserisci-buffet";
 		
 	}
 	
@@ -88,19 +93,20 @@ public class BuffetController {
 	}
 	
 	@PostMapping("/admin/buffet/{buffetId}/modifica")
-	public String modificaBuffet(@Valid @ModelAttribute("buffet") Buffet buffet,
+	public String updateBuffet(@Valid @ModelAttribute("buffet") Buffet buffet,
 			BindingResult buffetBindingResult) {
 		
 		if (!buffetBindingResult.hasErrors()) {
 			buffetService.save(buffet);
+			return "redirect:/admin";
 		}
 		
-		return "redirect:/admin";
+		return "modifica-buffet";
 		
 	}
 	
 	@GetMapping("/admin/buffet/{buffetId}/cancella")
-	public String cancellaBuffet(@PathVariable("buffetId") Long buffetId) {
+	public String deleteBuffet(@PathVariable("buffetId") Long buffetId) {
 		
 		Buffet buffet = buffetService.findById(buffetId);
 		Chef chef = buffet.getChef();

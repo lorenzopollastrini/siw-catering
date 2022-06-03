@@ -56,23 +56,29 @@ public class PiattoController {
 	}
 	
 	@PostMapping("/admin/buffet/{buffetId}/piatto")
-	public String inserisciPiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
+	public String createPiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
 			BindingResult piattoBindingResult,
-			@PathVariable("buffetId") Long buffetId) {
+			@PathVariable("buffetId") Long buffetId,
+			Model model) {
+		
+		Buffet buffet = buffetService.findById(buffetId);
 		
 		if (!piattoBindingResult.hasErrors()) {
 			
-			Buffet buffet = buffetService.findById(buffetId);
-			
 			piatto.setBuffet(buffet);
+			
 			Piatto savedPiatto = piattoService.save(piatto);
 			
 			buffet.addPiatto(savedPiatto);
 			buffetService.save(buffet);
 			
+			return "redirect:/admin";
+			
 		}
 		
-		return "redirect:/admin";
+		model.addAttribute("buffet", buffet);
+		
+		return "inserisci-piatto";
 		
 	}
 	
@@ -87,19 +93,20 @@ public class PiattoController {
 	}
 	
 	@PostMapping("/admin/piatto/{piattoId}/modifica")
-	public String modificaPiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
+	public String updatePiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
 			BindingResult piattoBindingResult) {
 		
 		if (!piattoBindingResult.hasErrors()) {
 			piattoService.save(piatto);
+			return "redirect:/admin";
 		}
 		
-		return "redirect:/admin";
+		return "modifica-piatto";
 		
 	}
 	
 	@GetMapping("/admin/piatto/{piattoId}/cancella")
-	public String cancellaPiatto(@PathVariable("piattoId") Long piattoId) {
+	public String deletePiatto(@PathVariable("piattoId") Long piattoId) {
 		
 		Piatto piatto = piattoService.findById(piattoId);
 		

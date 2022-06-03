@@ -37,22 +37,27 @@ public class IngredienteController {
 	}
 	
 	@PostMapping("/admin/piatto/{piattoId}/ingrediente")
-	public String inserisciIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
+	public String createIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
 			BindingResult ingredienteBindingResult,
-			@PathVariable("piattoId") Long piattoId) {
+			@PathVariable("piattoId") Long piattoId,
+			Model model) {
+		
+		Piatto piatto = piattoService.findById(piattoId);
 		
 		if (!ingredienteBindingResult.hasErrors()) {
-			
-			Piatto piatto = piattoService.findById(piattoId);
 			
 			Ingrediente savedIngrediente = ingredienteService.save(ingrediente);
 			
 			piatto.addIngrediente(savedIngrediente);
 			piattoService.save(piatto);
 			
+			return "redirect:/admin";
+			
 		}
 		
-		return "redirect:/admin";
+		model.addAttribute("piatto", piatto);
+		
+		return "inserisci-ingrediente";
 		
 	}
 	
@@ -67,19 +72,20 @@ public class IngredienteController {
 	}
 	
 	@PostMapping("/admin/ingrediente/{ingredienteId}/modifica")
-	public String modificaIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
+	public String updateIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
 			BindingResult ingredienteBindingResult) {
 		
 		if (!ingredienteBindingResult.hasErrors()) {
 			ingredienteService.save(ingrediente);
+			return "redirect:/admin";
 		}
 		
-		return "redirect:/admin";
+		return "modifica-ingrediente";
 		
 	}
 	
 	@GetMapping("/admin/ingrediente/{ingredienteId}/cancella")
-	public String cancellaIngrediente(@PathVariable("ingredienteId") Long ingredienteId) {
+	public String deleteIngrediente(@PathVariable("ingredienteId") Long ingredienteId) {
 		
 		Ingrediente ingrediente = ingredienteService.findById(ingredienteId);
 		

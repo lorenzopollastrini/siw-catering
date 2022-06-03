@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,10 +21,13 @@ public class Chef {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Size(min = 1, max = 30)
 	private String nome;
 	
+	@Size(min = 1, max = 30)
 	private String cognome;
 	
+	@Size(min = 1, max = 30)
 	private String nazione;
 	
 	@OneToMany(mappedBy = "chef")

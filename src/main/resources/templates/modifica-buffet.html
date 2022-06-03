@@ -5,7 +5,7 @@
 <body>
 
 	<div th:replace="fragments/base :: header"></div>
-	
+
 	<main class="row m-5">
 		<div id="main-left" class="col-4"></div>
 		<div id="main-center" class="col-4">
@@ -14,11 +14,20 @@
 			<form th:action="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}" method="post" th:object="${buffet}">
 				<div class="mb-3">
 					<label for="input-nome" class="form-label">Nome</label>
-					<input type="text" th:field="*{nome}" class="form-control" id="input-nome" />
+					<input type="text" th:field="*{nome}" class="form-control"
+						th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}" id="input-nome" />
+					<div class="invalid-feedback">
+						<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+					</div>
 				</div>
 				<div class="mb-3">
 					<label for="input-descrizione" class="form-label">Descrizione</label>
-					<input type="text" th:field="*{descrizione}" class="form-control" id="input-descrizione" />
+					<input type="text" th:field="*{descrizione}" class="form-control"
+						th:classappend="${#fields.hasErrors('descrizione') ? 'is-invalid' : ''}"
+						id="input-descrizione" />
+					<div class="invalid-feedback">
+						<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+					</div>
 				</div>
 				<input type="hidden" th:field="*{id}" />
 				<input type="hidden" th:field="*{chef}" />
@@ -28,9 +37,9 @@
 		</div>
 		<div id="main-right" class="col-4"></div>
 	</main>
-	
+
 	<div th:replace="fragments/base :: scripts"></div>
-	
+
 </body>
 
 </html>

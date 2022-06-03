@@ -56,7 +56,8 @@ public class ChefController {
 	
 	@PostMapping("/admin/chef")
 	public String createChef(@Valid @ModelAttribute("chef") Chef chef,
-			BindingResult chefBindingResult) {
+			BindingResult chefBindingResult,
+			Model model) {
 		
 		if (!chefBindingResult.hasErrors()) {
 			chefService.save(chef);
@@ -64,6 +65,7 @@ public class ChefController {
 		}
 		
 		return "inserisci-chef";
+		
 	}
 	
 	@GetMapping("/admin/chef/{chefId}/modifica")
@@ -82,9 +84,10 @@ public class ChefController {
 		
 		if (!chefBindingResult.hasErrors()) {
 			chefService.save(chef);
+			return "redirect:/admin";
 		}
 		
-		return "redirect:/admin";
+		return "modifica-chef";
 	}
 	
 	@GetMapping("/admin/chef/{chefId}/cancella")
