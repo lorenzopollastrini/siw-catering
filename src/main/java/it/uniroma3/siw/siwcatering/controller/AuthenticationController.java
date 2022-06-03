@@ -40,8 +40,7 @@ public class AuthenticationController {
 	public String register(@Valid @ModelAttribute("user") User user,
 			BindingResult userBindingResult,
 			@Valid @ModelAttribute("credentials") Credentials credentials,
-			BindingResult credentialsBindingResult,
-			Model model) {
+			BindingResult credentialsBindingResult) {
 		
 		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			

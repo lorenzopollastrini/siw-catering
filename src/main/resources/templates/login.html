@@ -3,15 +3,18 @@
 <head th:replace="fragments/base :: head(title='SIW Catering - Accedi')"></head>
 
 <body>
-	<div th:if="${param.error}">
-		Credenziali errate.</div>
-	<div th:if="${param.logout}">
-		Hai effettuato il logout.</div>
+
 	<main class="row m-5">
 		<div id="main-left" class="col-4"></div>
 		<div id="main-center" class="col-4">
 			<h1 class="text-center">SIW Catering - Accedi</h1>
 			<br>
+			<div th:if="${param.error}" class="alert alert-danger" role="alert">
+				Credenziali errate.
+			</div>
+			<div th:if="${param.logout}" class="alert alert-success" role="alert">
+				Hai effettuato il logout.
+			</div>
 			<form th:action="@{/login}" method="post">
 				<div class="mb-3">
 					<label for="input-username" class="form-label">Username</label>
