@@ -6,56 +6,60 @@
 <body>
 
 	<div th:replace="fragments/base :: header"></div>
-
-	<main class="row m-3">
-		<div id="main-left" class="col-2"></div>
-		<div id="main-center" class="col-8">
-
-			<div class="d-flex w-100 justify-content-between">
-				<h5>
+	
+	<div class="container-fluid">
+		
+		<main class="row m-3">
+			<div id="main-left" class="col-2"></div>
+			<div id="main-center" class="col-8">
+	
+				<div class="d-flex w-100 justify-content-between">
+					<h5>
+						<!-- TODO: icona -->
+						<span th:text="${piatto.nome}"></span>
+					</h5>
+					<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
+						<a class="btn btn-info" th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica
+							generalità</a>
+						<a class="btn btn-primary"
+							th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/nuovo'}">Aggiungi
+							ingrediente</a>
+						<a class="btn btn-danger" th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}">Cancella</a>
+					</span>
+				</div>
+				<div>
 					<!-- TODO: icona -->
-					<span th:text="${piatto.nome}"></span>
-				</h5>
-				<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
-					<a class="btn btn-info" th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica
-						generalità</a>
-					<a class="btn btn-primary"
-						th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/nuovo'}">Aggiungi
-						ingrediente</a>
-					<a class="btn btn-danger" th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}">Cancella</a>
-				</span>
+					Dal buffet <a th:text="${piatto.buffet.nome}"></a> dello chef <a
+						th:text="${piatto.buffet.chef.nome + ' ' + piatto.buffet.chef.cognome}"></a>
+				</div>
+				<div>
+					<p th:text="${piatto.descrizione}"></p>
+				</div>
+	
+				<br>
+	
+				<h5>Ingredienti</h5>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" th:each="ingrediente : ${piatto.ingredienti}">
+						<div class="d-flex justify-content-between">
+							<span th:text="${ingrediente.nome + ' (' + ingrediente.origine + ')'}"></span>
+							<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
+								<a class="btn btn-info"
+									th:href="@{'/admin/ingrediente/' + ${ingrediente.id} + '/modifica'}">Modifica
+									generalità</a>
+								<a th:href="@{'/admin/ingrediente/' + ${ingrediente.id} + '/cancella'}"
+									class="btn btn-danger">Cancella</a>
+							</span>
+						</div>
+						<p th:text="${ingrediente.descrizione}"></p>
+					</li>
+				</ul>
+	
 			</div>
-			<div>
-				<!-- TODO: icona -->
-				Dal buffet <a th:text="${piatto.buffet.nome}"></a> dello chef <a
-					th:text="${piatto.buffet.chef.nome + ' ' + piatto.buffet.chef.cognome}"></a>
-			</div>
-			<div>
-				<p th:text="${piatto.descrizione}"></p>
-			</div>
-
-			<br>
-
-			<h5>Ingredienti</h5>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item" th:each="ingrediente : ${piatto.ingredienti}">
-					<div class="d-flex justify-content-between">
-						<span th:text="${ingrediente.nome + ' (' + ingrediente.origine + ')'}"></span>
-						<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
-							<a class="btn btn-info"
-								th:href="@{'/admin/ingrediente/' + ${ingrediente.id} + '/modifica'}">Modifica
-								generalità</a>
-							<a th:href="@{'/admin/ingrediente/' + ${ingrediente.id} + '/cancella'}"
-								class="btn btn-danger">Cancella</a>
-						</span>
-					</div>
-					<p th:text="${ingrediente.descrizione}"></p>
-				</li>
-			</ul>
-
-		</div>
-		<div id="main-right" class="col-2"></div>
-	</main>
+			<div id="main-right" class="col-2"></div>
+		</main>
+		
+	</div>
 
 	<div th:replace="fragments/base :: scripts"></div>
 

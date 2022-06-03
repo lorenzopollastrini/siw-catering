@@ -6,35 +6,39 @@
 
 	<div th:replace="fragments/base :: header"></div>
 	
-	<main class="row m-5">
-		<div id="main-left" class="col-4"></div>
-		<div id="main-center" class="col-4">
-			<h2 class="text-center">Inserisci piatto</h2>
-			<br>
-			<form th:action="@{'/admin/buffet/' + ${buffet.id} + '/piatto'}" method="post" th:object="${piatto}">
-				<div class="mb-3">
-					<label for="input-nome" class="form-label">Nome</label>
-					<input type="text" th:field="*{nome}" class="form-control"
-					th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}"
-					id="input-nome" />
-					<div class="invalid-feedback">
-						<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+	<div class="container-fluid">
+		
+		<main class="row m-5">
+			<div id="main-left" class="col-4"></div>
+			<div id="main-center" class="col-4">
+				<h2 class="text-center">Inserisci piatto</h2>
+				<br>
+				<form th:action="@{'/admin/buffet/' + ${buffet.id} + '/piatto'}" method="post" th:object="${piatto}">
+					<div class="mb-3">
+						<label for="input-nome" class="form-label">Nome</label>
+						<input type="text" th:field="*{nome}" class="form-control"
+						th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}"
+						id="input-nome" />
+						<div class="invalid-feedback">
+							<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+						</div>
 					</div>
-				</div>
-				<div class="mb-3">
-					<label for="input-descrizione" class="form-label">Descrizione</label>
-					<input type="text" th:field="*{descrizione}" class="form-control"
-					th:classappend="${#fields.hasErrors('descrizione') ? 'is-invalid' : ''}"
-					id="input-descrizione" />
-					<div class="invalid-feedback">
-						<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+					<div class="mb-3">
+						<label for="input-descrizione" class="form-label">Descrizione</label>
+						<input type="text" th:field="*{descrizione}" class="form-control"
+						th:classappend="${#fields.hasErrors('descrizione') ? 'is-invalid' : ''}"
+						id="input-descrizione" />
+						<div class="invalid-feedback">
+							<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+						</div>
 					</div>
-				</div>
-				<button type="submit" class="btn btn-primary">Inserisci</button>
-			</form>
-		</div>
-		<div id="main-right" class="col-4"></div>
-	</main>
+					<button type="submit" class="btn btn-primary">Inserisci</button>
+				</form>
+			</div>
+			<div id="main-right" class="col-4"></div>
+		</main>
+		
+	</div>
 	
 	<div th:replace="fragments/base :: scripts"></div>
 	

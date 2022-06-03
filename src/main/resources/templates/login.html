@@ -4,33 +4,37 @@
 
 <body>
 
-	<main class="row m-5">
-		<div id="main-left" class="col-4"></div>
-		<div id="main-center" class="col-4">
-			<h1 class="text-center">SIW Catering - Accedi</h1>
-			<br>
-			<div th:if="${param.error}" class="alert alert-danger" role="alert">
-				Credenziali errate.
-			</div>
-			<div th:if="${param.logout}" class="alert alert-success" role="alert">
-				Hai effettuato il logout.
-			</div>
-			<form th:action="@{/login}" method="post">
-				<div class="mb-3">
-					<label for="input-username" class="form-label">Username</label>
-					<input type="text" name="username" class="form-control" id="input-username" />
+	<div class="container-fluid">
+	
+		<main class="row m-5">
+			<div id="main-left" class="col-4"></div>
+			<div id="main-center" class="col-4">
+				<h1 class="text-center">SIW Catering - Accedi</h1>
+				<br>
+				<div th:if="${param.error}" class="alert alert-danger" role="alert">
+					Credenziali errate.
 				</div>
-				<div class="mb-3">
-					<label for="input-password" class="form-label">Password</label>
-					<input type="password" name="password" class="form-control" id="input-password" />
+				<div th:if="${param.logout}" class="alert alert-success" role="alert">
+					Hai effettuato il logout.
 				</div>
-				<button type="submit" class="btn btn-primary">Accedi</button>
-			</form>
-			<br>
-			<span>Non hai ancora un account? <a th:href="@{/register}">Registrati</a>.</span>
-		</div>
-		<div id="main-right" class="col-4"></div>
-	</main>
+				<form th:action="@{/login}" method="post">
+					<div class="mb-3">
+						<label for="input-username" class="form-label">Username</label>
+						<input type="text" name="username" class="form-control" id="input-username" />
+					</div>
+					<div class="mb-3">
+						<label for="input-password" class="form-label">Password</label>
+						<input type="password" name="password" class="form-control" id="input-password" />
+					</div>
+					<button type="submit" class="btn btn-primary">Accedi</button>
+				</form>
+				<br>
+				<span>Non hai ancora un account? <a th:href="@{/register}">Registrati</a>.</span>
+			</div>
+			<div id="main-right" class="col-4"></div>
+		</main>
+		
+	</div>
 	
 	<div th:replace="fragments/base :: scripts"></div>
 </body>

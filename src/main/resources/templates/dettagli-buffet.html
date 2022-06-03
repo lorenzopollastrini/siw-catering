@@ -7,44 +7,48 @@
 
 	<div th:replace="fragments/base :: header"></div>
 
-	<main class="row m-3">
-		<div id="main-left" class="col-2"></div>
-		<div id="main-center" class="col-8">
-
-			<div class="d-flex w-100 justify-content-between">
-				<h5>
-					<!-- TODO: icona -->
-					<span th:text="${'Buffet ' + buffet.nome}"></span>
-				</h5>
-				<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
-					<a class="btn btn-info" th:href="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}">Modifica
-						generalità</a>
-					<a class="btn btn-primary" th:href="@{'/admin/buffet/' + ${buffet.id} + '/piatto/nuovo'}">Aggiungi
-						piatto</a>
-					<a class="btn btn-danger" th:href="@{'/admin/buffet/' + ${buffet.id} + '/cancella'}">Cancella</a>
-				</span>
+	<div class="container-fluid">
+		
+		<main class="row m-3">
+			<div id="main-left" class="col-2"></div>
+			<div id="main-center" class="col-8">
+	
+				<div class="d-flex w-100 justify-content-between">
+					<h5>
+						<!-- TODO: icona -->
+						<span th:text="${'Buffet ' + buffet.nome}"></span>
+					</h5>
+					<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
+						<a class="btn btn-info" th:href="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}">Modifica
+							generalità</a>
+						<a class="btn btn-primary" th:href="@{'/admin/buffet/' + ${buffet.id} + '/piatto/nuovo'}">Aggiungi
+							piatto</a>
+						<a class="btn btn-danger" th:href="@{'/admin/buffet/' + ${buffet.id} + '/cancella'}">Cancella</a>
+					</span>
+				</div>
+				<div>
+					<i class="bi bi-person"></i>
+					Dello chef <a th:text="${buffet.chef.nome + ' ' + buffet.chef.cognome}"></a>
+				</div>
+				<div>
+					<p th:text="${buffet.descrizione}"></p>
+				</div>
+	
+				<br>
+	
+				<h5>Menù</h5>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item d-flex justify-content-between" th:each="piatto : ${buffet.piatti}">
+						<span th:text="${piatto.nome}"></span>
+						<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary">Visualizza</a>
+					</li>
+				</ul>
+	
 			</div>
-			<div>
-				<i class="bi bi-person"></i>
-				Dello chef <a th:text="${buffet.chef.nome + ' ' + buffet.chef.cognome}"></a>
-			</div>
-			<div>
-				<p th:text="${buffet.descrizione}"></p>
-			</div>
-
-			<br>
-
-			<h5>Menù</h5>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item d-flex justify-content-between" th:each="piatto : ${buffet.piatti}">
-					<span th:text="${piatto.nome}"></span>
-					<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary">Visualizza</a>
-				</li>
-			</ul>
-
-		</div>
-		<div id="main-right" class="col-2"></div>
-	</main>
+			<div id="main-right" class="col-2"></div>
+		</main>
+		
+	</div>
 
 	<div th:replace="fragments/base :: scripts"></div>
 

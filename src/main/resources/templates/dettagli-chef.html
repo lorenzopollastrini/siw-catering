@@ -6,84 +6,88 @@
 <body>
 
 	<div th:replace="fragments/base :: header"></div>
-
-	<main class="row m-3">
-		<div id="main-left" class="col-2"></div>
-		<div id="main-center" class="col-8">
+	
+	<div class="container-fluid">
 		
-			<div class="d-flex w-100 justify-content-between">
-				<h5>
-					<i class="bi bi-person"></i>
-					<span th:text="${'Chef ' + chef.nome + ' ' + chef.cognome}"></span>	
-				</h5>
-				<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
-					<a class="btn btn-info"
-						th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica generalità</a>
-					<a class="btn btn-primary"
-						th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi buffet</a>
-					<a class="btn btn-danger"
-						th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
-				</span>
-			</div>
-			<div>
-				<i class="bi bi-pin-map"></i>
-				<span th:text="${chef.nazione}"></span>
-			</div>
+		<main class="row m-3">
+			<div id="main-left" class="col-2"></div>
+			<div id="main-center" class="col-8">
 			
-			<br>
-			
-			<ul class="nav nav-tabs" role="tablist">
-				<li class="nav-item" role="presentation">
-					<button class="nav-link active" id="buffet-tab" data-bs-toggle="tab" data-bs-target="#buffet"
-						type="button" role="tab" aria-controls="buffet" aria-selected="true">Buffet</button>
-				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="piatti-tab" data-bs-toggle="tab" data-bs-target="#piatti" type="button"
-						role="tab" aria-controls="piatti" aria-selected="false">Piatti</button>
-				</li>
-			</ul>
-			
-			<div class="tab-content">
-			
-				<div class="tab-pane fade show active p-3" id="buffet" role="tabpanel" aria-labelledby="buffet-tab">
-
-					<div class="row row-cols-1 row-cols-md-2 g-4">
-						<div class="col" th:each="buffet : ${chef.buffet}">
-							<div class="card h-100">
-								<div class="card-body">
-									<h5 class="card-title" th:text="${buffet.nome}"></h5>
-									<p class="card-text" th:text="${buffet.descrizione}"></p>
-									<a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-primary">Visualizza</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
+				<div class="d-flex w-100 justify-content-between">
+					<h5>
+						<i class="bi bi-person"></i>
+						<span th:text="${'Chef ' + chef.nome + ' ' + chef.cognome}"></span>	
+					</h5>
+					<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
+						<a class="btn btn-info"
+							th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica generalità</a>
+						<a class="btn btn-primary"
+							th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi buffet</a>
+						<a class="btn btn-danger"
+							th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
+					</span>
+				</div>
+				<div>
+					<i class="bi bi-pin-map"></i>
+					<span th:text="${chef.nazione}"></span>
 				</div>
 				
-				<div class="tab-pane fade p-3" id="piatti" role="tabpanel" aria-labelledby="piatti-tab">
-					
-					<div class="row row-cols-1 row-cols-md-2 g-4">
-						<th:block th:each="buffet : ${chef.buffet}">
-							<div class="col" th:each="piatto : ${buffet.piatti}">
+				<br>
+				
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="buffet-tab" data-bs-toggle="tab" data-bs-target="#buffet"
+							type="button" role="tab" aria-controls="buffet" aria-selected="true">Buffet</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="piatti-tab" data-bs-toggle="tab" data-bs-target="#piatti" type="button"
+							role="tab" aria-controls="piatti" aria-selected="false">Piatti</button>
+					</li>
+				</ul>
+				
+				<div class="tab-content">
+				
+					<div class="tab-pane fade show active p-3" id="buffet" role="tabpanel" aria-labelledby="buffet-tab">
+	
+						<div class="row row-cols-1 row-cols-md-2 g-4">
+							<div class="col" th:each="buffet : ${chef.buffet}">
 								<div class="card h-100">
 									<div class="card-body">
-										<h5 class="card-title" th:text="${piatto.nome}"></h5>
-										<p class="card-text" th:text="${piatto.descrizione}"></p>
-										<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary">Visualizza</a>
+										<h5 class="card-title" th:text="${buffet.nome}"></h5>
+										<p class="card-text" th:text="${buffet.descrizione}"></p>
+										<a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-primary">Visualizza</a>
 									</div>
 								</div>
 							</div>
-						</th:block>
+						</div>
+	
+					</div>
+					
+					<div class="tab-pane fade p-3" id="piatti" role="tabpanel" aria-labelledby="piatti-tab">
+						
+						<div class="row row-cols-1 row-cols-md-2 g-4">
+							<th:block th:each="buffet : ${chef.buffet}">
+								<div class="col" th:each="piatto : ${buffet.piatti}">
+									<div class="card h-100">
+										<div class="card-body">
+											<h5 class="card-title" th:text="${piatto.nome}"></h5>
+											<p class="card-text" th:text="${piatto.descrizione}"></p>
+											<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary">Visualizza</a>
+										</div>
+									</div>
+								</div>
+							</th:block>
+						</div>
+						
 					</div>
 					
 				</div>
 				
 			</div>
-			
-		</div>
-		<div id="main-right" class="col-2"></div>
-	</main>
+			<div id="main-right" class="col-2"></div>
+		</main>
+		
+	</div>
 
 	<div th:replace="fragments/base :: scripts"></div>
 

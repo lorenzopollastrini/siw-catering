@@ -6,45 +6,49 @@
 
 	<div th:replace="fragments/base :: header"></div>
 	
-	<main class="row m-5">
-		<div id="main-left" class="col-4"></div>
-		<div id="main-center" class="col-4">
-			<h2 class="text-center">Modifica ingrediente</h2>
-			<br>
-			<form th:action="@{'/admin/ingrediente/' + ${ingrediente.id} + '/modifica'}" method="post" th:object="${ingrediente}">
-				<div class="mb-3">
-					<label for="input-nome" class="form-label">Nome</label>
-					<input type="text" th:field="*{nome}" class="form-control"
-					th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}"
-					id="input-nome" />
-					<div class="invalid-feedback">
-						<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+	<div class="container-fluid">
+		
+		<main class="row m-5">
+			<div id="main-left" class="col-4"></div>
+			<div id="main-center" class="col-4">
+				<h2 class="text-center">Modifica ingrediente</h2>
+				<br>
+				<form th:action="@{'/admin/ingrediente/' + ${ingrediente.id} + '/modifica'}" method="post" th:object="${ingrediente}">
+					<div class="mb-3">
+						<label for="input-nome" class="form-label">Nome</label>
+						<input type="text" th:field="*{nome}" class="form-control"
+						th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}"
+						id="input-nome" />
+						<div class="invalid-feedback">
+							<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+						</div>
 					</div>
-				</div>
-				<div class="mb-3">
-					<label for="input-descrizione" class="form-label">Descrizione</label>
-					<input type="text" th:field="*{descrizione}" class="form-control"
-					th:classappend="${#fields.hasErrors('descrizione') ? 'is-invalid' : ''}"
-					id="input-descrizione" />
-					<div class="invalid-feedback">
-						<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+					<div class="mb-3">
+						<label for="input-descrizione" class="form-label">Descrizione</label>
+						<input type="text" th:field="*{descrizione}" class="form-control"
+						th:classappend="${#fields.hasErrors('descrizione') ? 'is-invalid' : ''}"
+						id="input-descrizione" />
+						<div class="invalid-feedback">
+							<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+						</div>
 					</div>
-				</div>
-				<div class="mb-3">
-					<label for="input-origine" class="form-label">Origine</label>
-					<input type="text" th:field="*{origine}" class="form-control"
-					th:classappend="${#fields.hasErrors('origine') ? 'is-invalid' : ''}"
-					id="input-origine" />
-					<div class="invalid-feedback">
-						<span th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></span>
+					<div class="mb-3">
+						<label for="input-origine" class="form-label">Origine</label>
+						<input type="text" th:field="*{origine}" class="form-control"
+						th:classappend="${#fields.hasErrors('origine') ? 'is-invalid' : ''}"
+						id="input-origine" />
+						<div class="invalid-feedback">
+							<span th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></span>
+						</div>
 					</div>
-				</div>
-				<input type="hidden" th:field="*{id}" />
-				<button type="submit" class="btn btn-primary">Modifica</button>
-			</form>
-		</div>
-		<div id="main-right" class="col-4"></div>
-	</main>
+					<input type="hidden" th:field="*{id}" />
+					<button type="submit" class="btn btn-primary">Modifica</button>
+				</form>
+			</div>
+			<div id="main-right" class="col-4"></div>
+		</main>
+		
+	</div>
 	
 	<div th:replace="fragments/base :: scripts"></div>
 	
