@@ -27,7 +27,7 @@
 								<ul class="list-group">
 									<li class="list-group-item d-flex justify-content-between align-items-center"
 										th:each="chef : ${chefs}">
-										<a th:href="@{'/admin/chef/' + ${chef.id}}"
+										<a th:href="@{'/chef/' + ${chef.id}}"
 											th:text="${chef.cognome + ', ' + chef.nome}"></a>
 										<span class="btn-group">
 											<a class="btn btn-info"
@@ -56,7 +56,7 @@
 								<ul class="list-group">
 									<li class="list-group-item d-flex justify-content-between align-items-center"
 										th:each="buffet : ${buffets}">
-										<a th:href="@{'/admin/buffet/' + ${buffet.id}}" th:text="${buffet.nome}"></a>
+										<a th:href="@{'/buffet/' + ${buffet.id}}" th:text="${buffet.nome}"></a>
 										<span class="btn-group">
 											<a class="btn btn-info"
 												th:href="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}">Modifica
@@ -84,7 +84,7 @@
 								<ul class="list-group">
 									<li class="list-group-item d-flex justify-content-between align-items-center"
 										th:each="piatto : ${piatti}">
-										<a th:href="@{'/admin/piatto/' + ${piatto.id}}" th:text="${piatto.nome}"></a>
+										<a th:href="@{'/piatto/' + ${piatto.id}}" th:text="${piatto.nome}"></a>
 										<span class="btn-group">
 											<a class="btn btn-info"
 												th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica

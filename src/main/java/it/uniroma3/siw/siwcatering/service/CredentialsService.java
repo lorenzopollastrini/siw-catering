@@ -1,5 +1,7 @@
 package it.uniroma3.siw.siwcatering.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,15 @@ public class CredentialsService {
 	}
 	
 	public Credentials findByUsername(String username) {
-		return credentialsRepository.findByUsername(username).get();
+		
+		Optional<Credentials> credentials = credentialsRepository.findByUsername(username);
+
+		if (credentials.isPresent()) {
+			return credentials.get();
+		}
+
+		return null;
+		
 	}
 
 }
