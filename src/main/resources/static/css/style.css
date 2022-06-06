@@ -1,0 +1,13 @@
+hr {
+    text-align: center;
+    color: black;
+    opacity: .5;
+}
+
+hr:after {
+    background: #fff;
+    content: attr(data-content);
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+}

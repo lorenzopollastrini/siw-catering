@@ -1,5 +1,7 @@
 package it.uniroma3.siw.siwcatering.authentication;
 
+import static it.uniroma3.siw.siwcatering.model.Credentials.ADMIN_ROLE;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static it.uniroma3.siw.siwcatering.model.Credentials.ADMIN_ROLE;;
+import it.uniroma3.siw.siwcatering.service.CustomOidcUserService;;
 
 @Configuration
 @EnableWebSecurity
@@ -23,30 +25,38 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource datasource;
 	
+	@Autowired
+    private CustomOidcUserService customOidcUserService;
+	
 	/**
 	 * Fornisce le configurazioni di autenticazione ed autorizzazione
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests() // Authorization paragraph
-			.antMatchers(HttpMethod.GET, "/login", "/register", "/css/**", "/images/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-			.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-			.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-			.anyRequest().authenticated()
+		http.authorizeRequests(t -> t	// Authorization paragraph
+				.antMatchers(HttpMethod.GET, "/login", "/register", "/css/**", "/images/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+				.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+				.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+				.anyRequest().authenticated()
+				)
 			
-			.and().formLogin() // Login paragraph
-			.loginPage("/login")
-			.defaultSuccessUrl("/default", true)
+			.formLogin(t -> t			// Login paragraph
+					.loginPage("/login")
+					.defaultSuccessUrl("/default", true))
 			
-			.and().logout() // Logout paragraph
-			.logoutUrl("/logout")
-			.logoutSuccessUrl("/login?logout")
-			.invalidateHttpSession(true)
-			.deleteCookies("JSESSIONID")
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.clearAuthentication(true).permitAll();
+			.oauth2Login(t -> t
+					.loginPage("/login")
+					.userInfoEndpoint().oidcUserService(customOidcUserService))
+			
+			.logout(t -> t				// Logout paragraph
+					.logoutUrl("/logout")
+					.logoutSuccessUrl("/login?logout")
+					.invalidateHttpSession(true)
+					.deleteCookies("JSESSIONID")
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.clearAuthentication(true).permitAll());
 		 	
 	}
 	
