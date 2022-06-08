@@ -38,8 +38,4 @@ public class Buffet {
 		piatti.add(piatto);
 	}
 	
-	public void removePiatto(Piatto piatto) {
-		piatti.remove(piatto);
-	}
-	
 }

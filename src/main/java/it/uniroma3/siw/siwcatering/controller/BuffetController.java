@@ -109,10 +109,6 @@ public class BuffetController {
 	public String deleteBuffet(@PathVariable("buffetId") Long buffetId) {
 		
 		Buffet buffet = buffetService.findById(buffetId);
-		Chef chef = buffet.getChef();
-		
-		chef.removeBuffet(buffet);
-		chefService.save(chef);
 		
 		buffetService.delete(buffet);
 		

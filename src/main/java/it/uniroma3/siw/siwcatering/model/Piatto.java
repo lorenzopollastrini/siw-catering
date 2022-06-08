@@ -39,9 +39,5 @@ public class Piatto {
 	public void addIngrediente(Ingrediente ingrediente) {
 		ingredienti.add(ingrediente);
 	}
-	
-	public void removeIngrediente(Ingrediente ingrediente) {
-		ingredienti.remove(ingrediente);
-	}
 
 }
