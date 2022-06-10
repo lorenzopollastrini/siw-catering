@@ -15,17 +15,19 @@
 				<div class="list-group">
 					<a th:href="@{'/chef/' + ${chef.id}}" class="list-group-item list-group-item-action"
 						th:each="chef : ${chefs}">
-						<div class="d-flex w-100 justify-content-between">
+						<div class="d-flex w-100 justify-content-between align-items-center">
 							<div>
-								<i class="bi bi-person"></i>
-								<span th:text="${chef.nome + ' ' + chef.cognome}"></span>
+								<div>
+									<i class="bi bi-person"></i>
+									<span th:text="${chef.nome + ' ' + chef.cognome}"></span>
+								</div>	
+								<div>
+									<i class="bi bi-pin-map"></i>
+									<span class="text-muted" th:text="${chef.nazione}"></span>
+								</div>	
 							</div>
-							<span class="badge bg-primary rounded-pill"
+							<span class="badge bg-dark rounded-pill"
 								th:text="${#lists.size(chef.buffet) + ' buffet'}"></span>
-						</div>
-						<div>
-							<i class="bi bi-pin-map"></i>
-							<span class="text-muted" th:text="${chef.nazione}"></span>
 						</div>
 					</a>
 				</div>

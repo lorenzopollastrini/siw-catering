@@ -5,7 +5,7 @@
 <body>
 
 	<div class="container-fluid">
-	
+
 		<main class="row m-5">
 			<div id="main-left" class="col-4"></div>
 			<div id="main-center" class="col-4">
@@ -20,24 +20,33 @@
 				<form th:action="@{/login}" method="post">
 					<div class="mb-3">
 						<label for="input-username" class="form-label">Username</label>
-						<input type="text" name="username" class="form-control" id="input-username" />
+						<input type="text" name="username" class="form-control form-control-custom"
+							id="input-username" />
 					</div>
 					<div class="mb-3">
 						<label for="input-password" class="form-label">Password</label>
-						<input type="password" name="password" class="form-control" id="input-password" />
+						<input type="password" name="password" class="form-control form-control-custom"
+							id="input-password" />
 					</div>
-					<button type="submit" class="btn btn-primary">Accedi</button>
+					<div class="d-grid">
+						<button type="submit" class="btn btn-primary btn-primary-custom">Accedi</button>
+					</div>
 				</form>
 				<br>
 				<span>Non hai ancora un account? <a th:href="@{/register}">Registrati</a>.</span>
-				<hr class="my-4" data-content="oppure">
-				<a class="btn btn-primary" th:href="@{/oauth2/authorization/google}">Accedi con Google</a>
+				<hr class="hr-text my-4" data-content="oppure">
+				<div class="d-grid">
+					<a class="btn btn-primary btn-primary-custom" th:href="@{/oauth2/authorization/google}">
+						<i class="bi bi-google"></i>
+						Accedi con Google
+					</a>
+				</div>
 			</div>
 			<div id="main-right" class="col-4"></div>
 		</main>
-		
+
 	</div>
-	
+
 	<div th:replace="fragments/base :: scripts"></div>
 </body>
 

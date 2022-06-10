@@ -1,13 +1,107 @@
-hr {
+:root {
+	--main-color: #fff7e9;
+	--secondary-color: coral;
+	--secondary-color-light-1: rgb(255, 190, 102);	
+	--secondary-color-light-2: peachpuff;
+	--tertiary-color: chocolate;
+	--main-white-shade: whitesmoke;
+	--main-font-family: 'Trebuchet MS', sans-serif;
+	--main-font-color: black;
+}
+
+body {
+	font-family: var(--main-font-family);
+	background-color: var(--main-color);
+}
+
+header {
+	background-color: var(--main-white-shade);
+}
+
+a {
+	text-decoration: none;
+	color: var(--secondary-color);
+}
+
+a:hover {
+	color: var(--tertiary-color);
+}
+
+nav > a {
+	border-bottom: medium solid var(--secondary-color);
+	padding: .5rem;
+	color: var(--main-font-color);
+}
+
+.nav-tabs-custom .nav-link {
+	color: var(--secondary-color);
+}
+
+#main-center {
+	padding: 1.5rem;
+	background-color: var(--main-white-shade);
+	border-left: .1rem solid var(--secondary-color);
+	border-right: .1rem solid var(--secondary-color);
+	border-radius: 5px;
+}
+
+.accordion-custom .accordion-button:not(.collapsed) {
+	color: var(--tertiary-color);
+	background-color: var(--secondary-color-light-2);
+}
+
+.accordion-custom .accordion-button:focus {
+	border-color: var(--secondary-color-light-1);
+	box-shadow: 0 0 0 .25rem var(--secondary-color-light-2);
+}
+
+.accordion-custom .accordion-button:not(.collapsed):after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23d2691e'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.hr-text {
     text-align: center;
     color: black;
     opacity: .5;
 }
 
-hr:after {
-    background: #fff;
+.hr-text:after {
+    background: var(--main-white-shade);
     content: attr(data-content);
     padding: 0 4px;
     position: relative;
     top: -13px;
+}
+
+.hr-small {
+	width: 2rem;
+}
+
+.form-control-custom:focus {
+	border-color: var(--secondary-color-light-1);
+	box-shadow: 0 0 0 .25rem var(--secondary-color-light-2);
+}
+
+.list-group-custom .list-group-item {
+	background-color: var(--main-white-shade);
+}
+
+.btn-primary-custom {
+	background-color: var(--secondary-color);
+	border-color: var(--secondary-color);
+}
+
+.btn-primary-custom:hover {
+	background-color: var(--tertiary-color);
+	border-color: var(--tertiary-color);
+}
+
+.btn-primary-custom:focus {
+	background-color: var(--tertiary-color);
+	border-color: var(--tertiary-color);
+	box-shadow: 0 0 0 .25rem var(--secondary-color-light-2);
+}
+
+#p-ingredients {
+	font-family: 'Gentium Basic', serif;
 }

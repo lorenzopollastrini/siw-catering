@@ -13,20 +13,7 @@
 			<div id="main-left" class="col-2"></div>
 			<div id="main-center" class="col-8">
 			
-				<div class="d-flex w-100 justify-content-between">
-					<h5>
-						<i class="bi bi-person"></i>
-						<span th:text="${'Chef ' + chef.nome + ' ' + chef.cognome}"></span>	
-					</h5>
-					<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
-						<a class="btn btn-info"
-							th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica generalità</a>
-						<a class="btn btn-primary"
-							th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi buffet</a>
-						<a class="btn btn-danger"
-							th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
-					</span>
-				</div>
+				<h5 class="text-center" th:text="${'Chef ' + chef.nome + ' ' + chef.cognome}"></h5>
 				<div>
 					<i class="bi bi-pin-map"></i>
 					<span th:text="${chef.nazione}"></span>
@@ -34,7 +21,7 @@
 				
 				<br>
 				
-				<ul class="nav nav-tabs" role="tablist">
+				<ul class="nav nav-tabs nav-tabs-custom" role="tablist">
 					<li class="nav-item" role="presentation">
 						<button class="nav-link active" id="buffet-tab" data-bs-toggle="tab" data-bs-target="#buffet"
 							type="button" role="tab" aria-controls="buffet" aria-selected="true">Buffet</button>
@@ -55,7 +42,7 @@
 									<div class="card-body">
 										<h5 class="card-title" th:text="${buffet.nome}"></h5>
 										<p class="card-text" th:text="${buffet.descrizione}"></p>
-										<a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-primary">Visualizza</a>
+										<a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-primary btn-primary-custom">Dettagli</a>
 									</div>
 								</div>
 							</div>
@@ -72,7 +59,7 @@
 										<div class="card-body">
 											<h5 class="card-title" th:text="${piatto.nome}"></h5>
 											<p class="card-text" th:text="${piatto.descrizione}"></p>
-											<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary">Visualizza</a>
+											<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary btn-primary-custom">Dettagli</a>
 										</div>
 									</div>
 								</div>
@@ -81,6 +68,19 @@
 						
 					</div>
 					
+				</div>
+				
+				<br>
+				
+				<div class="d-flex w-100 justify-content-end align-items-center">
+					<span class="btn-group flex-wrap" sec:authorize="hasAuthority('ADMIN')">
+						<a class="btn btn-dark"
+							th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica generalità</a>
+						<a class="btn btn-dark"
+							th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi buffet</a>
+						<a class="btn btn-danger"
+							th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
+					</span>
 				</div>
 				
 			</div>
