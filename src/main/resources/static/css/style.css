@@ -102,6 +102,37 @@ nav > a {
 	box-shadow: 0 0 0 .25rem var(--secondary-color-light-2);
 }
 
-#p-ingredients {
+.dropdown-custom .dropdown-button {
+	border-radius: 5px;
+	font-size: 1.5rem;
+	line-height: 1rem;
+	color: var(--tertiary-color);
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.dropdown-custom .dropdown-button:hover {
+	background-color: lightgrey;
+}
+
+.dropdown-custom .dropdown-button:focus {
+	background-color: lightgrey;
+}
+
+.dropdown-custom .dropdown-item:active {
+	background-color: var(--secondary-color);
+}
+
+.callout {
+	padding: 1rem;
+	margin-top: .75rem;
+	margin-bottom: .75rem;
+	border: 1px solid #e9ecef;
+  	border-left-width: 1px;
+	border-left-width: .25rem;
+	border-radius: .25rem;
+}
+
+.description {
 	font-family: 'Gentium Basic', serif;
 }

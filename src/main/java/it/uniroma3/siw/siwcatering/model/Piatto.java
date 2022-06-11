@@ -2,6 +2,7 @@ package it.uniroma3.siw.siwcatering.model;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Piatto {
 	@ManyToOne
 	private Buffet buffet;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "piatto_id")
 	private Collection<Ingrediente> ingredienti;
 	

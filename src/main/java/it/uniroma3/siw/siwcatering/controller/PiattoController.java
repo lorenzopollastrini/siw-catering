@@ -1,5 +1,6 @@
 package it.uniroma3.siw.siwcatering.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import it.uniroma3.siw.siwcatering.model.Piatto;
 import it.uniroma3.siw.siwcatering.model.Buffet;
-import it.uniroma3.siw.siwcatering.service.PiattoService;
+import it.uniroma3.siw.siwcatering.model.Piatto;
 import it.uniroma3.siw.siwcatering.service.BuffetService;
+import it.uniroma3.siw.siwcatering.service.PiattoService;
 
 @Controller
 public class PiattoController {
@@ -72,7 +73,7 @@ public class PiattoController {
 			buffet.addPiatto(savedPiatto);
 			buffetService.save(buffet);
 			
-			return "redirect:/admin";
+			return "redirect:/piatto/" + savedPiatto.getId();
 			
 		}
 		
@@ -97,8 +98,8 @@ public class PiattoController {
 			BindingResult piattoBindingResult) {
 		
 		if (!piattoBindingResult.hasErrors()) {
-			piattoService.save(piatto);
-			return "redirect:/admin";
+			Piatto savedPiatto = piattoService.save(piatto);
+			return "redirect:/piatto/" + savedPiatto.getId();
 		}
 		
 		return "modifica-piatto";
@@ -106,13 +107,18 @@ public class PiattoController {
 	}
 	
 	@GetMapping("/admin/piatto/{piattoId}/cancella")
-	public String deletePiatto(@PathVariable("piattoId") Long piattoId) {
+	public String deletePiatto(@PathVariable("piattoId") Long piattoId,
+			HttpServletRequest request) {
 		
 		Piatto piatto = piattoService.findById(piattoId);
 		
 		piattoService.delete(piatto);
 		
-		return "redirect:/admin";
+		String refererUrl = request.getHeader("referer");
+		if (refererUrl.contains("/admin")) {
+			return "redirect:/admin";
+		}
+		return "redirect:/buffet/" + piatto.getBuffet().getId();
 		
 	}
 

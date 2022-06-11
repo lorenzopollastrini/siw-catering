@@ -1,5 +1,6 @@
 package it.uniroma3.siw.siwcatering.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class IngredienteController {
 			piatto.addIngrediente(savedIngrediente);
 			piattoService.save(piatto);
 			
-			return "redirect:/admin";
+			return "redirect:/piatto/" + piatto.getId();
 			
 		}
 		
@@ -61,37 +62,42 @@ public class IngredienteController {
 		
 	}
 	
-	@GetMapping("/admin/ingrediente/{ingredienteId}/modifica")
-	public String getModificaIngredienteView(@PathVariable("ingredienteId") Long ingredienteId,
+	@GetMapping("/admin/piatto/{piattoId}/ingrediente/{ingredienteId}/modifica")
+	public String getModificaIngredienteView(@PathVariable("piattoId") Long piattoId,
+			@PathVariable("ingredienteId") Long ingredienteId,
 			Model model) {
 		
 		model.addAttribute("ingrediente", ingredienteService.findById(ingredienteId));
+		model.addAttribute("piattoId", piattoId);
 		
 		return "modifica-ingrediente";
 		
 	}
 	
-	@PostMapping("/admin/ingrediente/{ingredienteId}/modifica")
-	public String updateIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
-			BindingResult ingredienteBindingResult) {
+	@PostMapping("/admin/piatto/{piattoId}/ingrediente/{ingredienteId}/modifica")
+	public String updateIngrediente(@PathVariable("piattoId") Long piattoId,
+			@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
+			BindingResult ingredienteBindingResult,
+			HttpServletRequest request) {
 		
 		if (!ingredienteBindingResult.hasErrors()) {
 			ingredienteService.save(ingrediente);
-			return "redirect:/admin";
+			return "redirect:/piatto/" + piattoId;
 		}
 		
 		return "modifica-ingrediente";
 		
 	}
 	
-	@GetMapping("/admin/ingrediente/{ingredienteId}/cancella")
-	public String deleteIngrediente(@PathVariable("ingredienteId") Long ingredienteId) {
+	@GetMapping("/admin/piatto/{piattoId}/ingrediente/{ingredienteId}/cancella")
+	public String deleteIngrediente(@PathVariable("piattoId") Long piattoId,
+			@PathVariable("ingredienteId") Long ingredienteId) {
 		
 		Ingrediente ingrediente = ingredienteService.findById(ingredienteId);
 		
 		ingredienteService.delete(ingrediente);
 		
-		return "redirect:/admin";
+		return "redirect:/piatto/" + piattoId;
 		
 	}
 

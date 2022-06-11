@@ -1,5 +1,6 @@
 package it.uniroma3.siw.siwcatering.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class BuffetController {
 			chef.addBuffet(savedBuffet);
 			chefService.save(chef);
 			
-			return "redirect:/admin";
+			return "redirect:/buffet/" + savedBuffet.getId();
 			
 		}
 		
@@ -98,7 +99,7 @@ public class BuffetController {
 		
 		if (!buffetBindingResult.hasErrors()) {
 			buffetService.save(buffet);
-			return "redirect:/admin";
+			return "redirect:/buffet/" + buffet.getId();
 		}
 		
 		return "modifica-buffet";
@@ -106,13 +107,18 @@ public class BuffetController {
 	}
 	
 	@GetMapping("/admin/buffet/{buffetId}/cancella")
-	public String deleteBuffet(@PathVariable("buffetId") Long buffetId) {
+	public String deleteBuffet(@PathVariable("buffetId") Long buffetId,
+			HttpServletRequest request) {
 		
 		Buffet buffet = buffetService.findById(buffetId);
 		
 		buffetService.delete(buffet);
 		
-		return "redirect:/admin";
+		String refererUrl = request.getHeader("referer");
+		if (refererUrl.contains("/admin")) {
+			return "redirect:/admin";
+		}
+		return "redirect:/chef/" + buffet.getChef().getId();
 		
 	}
 

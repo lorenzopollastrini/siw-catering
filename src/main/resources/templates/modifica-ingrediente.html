@@ -13,7 +13,7 @@
 			<div id="main-center" class="col-4">
 				<h2 class="text-center">Modifica ingrediente</h2>
 				<br>
-				<form th:action="@{'/admin/ingrediente/' + ${ingrediente.id} + '/modifica'}" method="post"
+				<form th:action="@{'/admin/piatto/' + ${piattoId} + '/ingrediente/' + ${ingrediente.id} + '/modifica'}" method="post"
 					th:object="${ingrediente}">
 					<div class="mb-3">
 						<label for="input-nome" class="form-label">Nome</label>

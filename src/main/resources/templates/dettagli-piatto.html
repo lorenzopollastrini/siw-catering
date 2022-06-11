@@ -13,14 +13,34 @@
 			<div id="main-left" class="col-2"></div>
 			<div id="main-center" class="col-8">
 	
-				<h5 th:text="${piatto.nome}"></h5>
+				<div class="position-relative">
+					<h5 class="text-center" th:text="${piatto.nome}"></h5>
+					<div sec:authorize="hasAuthority('ADMIN')" class="dropdown dropdown-custom position-absolute top-0 end-0">
+						<button class="dropdown-button" type="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							<i class="bi bi-three-dots"></i>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item"
+									th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica
+									generalità</a></li>
+							<li><a class="dropdown-item"
+									th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/nuovo'}">Aggiungi
+									ingrediente</a></li>
+							<li><a class="dropdown-item"
+									th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}">Cancella</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+	
 				<div>
 					<!-- TODO: icona -->
-					Dal buffet <a th:text="${piatto.buffet.nome}"></a> dello chef <a
+					Dal buffet <a th:text="${'&ldquo;' + piatto.buffet.nome + '&rdquo;'}"></a> dello chef <a
 						th:text="${piatto.buffet.chef.nome + ' ' + piatto.buffet.chef.cognome}"></a>
 				</div>
-				<div>
-					<p th:text="${piatto.descrizione}"></p>
+				<div class="callout">
+					<p class="description m-0" th:text="${piatto.descrizione}"></p>
 				</div>
 	
 				<br>
@@ -31,31 +51,27 @@
 					<li class="list-group-item" th:each="ingrediente : ${piatto.ingredienti}">
 						<div class="d-flex justify-content-between">
 							<span th:text="${ingrediente.nome + ' (' + ingrediente.origine + ')'}"></span>
-							<span class="btn-group" sec:authorize="hasAuthority('ADMIN')">
-								<a class="btn btn-dark"
-									th:href="@{'/admin/ingrediente/' + ${ingrediente.id} + '/modifica'}">Modifica
-									generalità</a>
-								<a th:href="@{'/admin/ingrediente/' + ${ingrediente.id} + '/cancella'}"
-									class="btn btn-danger">Cancella</a>
-							</span>
+							<div sec:authorize="hasAuthority('ADMIN')" class="dropdown dropdown-custom position-absolute top-0 end-0">
+								<button class="dropdown-button" type="button" data-bs-toggle="dropdown"
+									aria-expanded="false">
+									<i class="bi bi-three-dots"></i>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item"
+											th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/' + ${ingrediente.id} + '/modifica'}">Modifica
+											generalità</a></li>
+									<li><a class="dropdown-item"
+											th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/' + ${ingrediente.id} + '/cancella'}">Cancella</a>
+									</li>
+								</ul>
+							</div>
 						</div>
-						<p th:text="${ingrediente.descrizione}"></p>
+						<p class="description m-0" th:text="${ingrediente.descrizione}"></p>
 					</li>
 				</ul>
 				
 				<br>
 				
-				<div class="d-flex w-100 justify-content-between">
-					<span class="btn-group flex-wrap" sec:authorize="hasAuthority('ADMIN')">
-						<a class="btn btn-dark" th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica
-							generalità</a>
-						<a class="btn btn-dark"
-							th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/nuovo'}">Aggiungi
-							ingrediente</a>
-						<a class="btn btn-danger" th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}">Cancella</a>
-					</span>
-				</div>
-	
 			</div>
 			<div id="main-right" class="col-2"></div>
 		</main>

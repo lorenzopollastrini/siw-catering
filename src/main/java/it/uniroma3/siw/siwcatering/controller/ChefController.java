@@ -60,8 +60,8 @@ public class ChefController {
 			Model model) {
 		
 		if (!chefBindingResult.hasErrors()) {
-			chefService.save(chef);
-			return "redirect:/admin";
+			Chef savedChef = chefService.save(chef);
+			return "redirect:/chef/" + savedChef.getId();
 		}
 		
 		return "inserisci-chef";
@@ -84,7 +84,7 @@ public class ChefController {
 		
 		if (!chefBindingResult.hasErrors()) {
 			chefService.save(chef);
-			return "redirect:/admin";
+			return "redirect:/chef/" + chef.getId();
 		}
 		
 		return "modifica-chef";
