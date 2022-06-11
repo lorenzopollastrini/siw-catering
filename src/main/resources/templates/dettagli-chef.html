@@ -13,6 +13,8 @@
 			<div id="main-left" class="col-2"></div>
 			<div id="main-center" class="col-8">
 			
+				<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert"></div>
+					
 				<div class="position-relative">
 					<h5 class="text-center" th:text="${'Chef ' + chef.nome + ' ' + chef.cognome}"></h5>
 					<div sec:authorize="hasAuthority('ADMIN')" class="dropdown dropdown-custom position-absolute top-0 end-0">

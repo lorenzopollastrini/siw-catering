@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.siw.siwcatering.model.Ingrediente;
 import it.uniroma3.siw.siwcatering.model.Piatto;
@@ -41,6 +42,7 @@ public class IngredienteController {
 	public String createIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
 			BindingResult ingredienteBindingResult,
 			@PathVariable("piattoId") Long piattoId,
+			RedirectAttributes redirectAttributes,
 			Model model) {
 		
 		Piatto piatto = piattoService.findById(piattoId);
@@ -51,6 +53,8 @@ public class IngredienteController {
 			
 			piatto.addIngrediente(savedIngrediente);
 			piattoService.save(piatto);
+			
+			redirectAttributes.addFlashAttribute("successFlashMessages", "Ingrediente aggiunto con successo.");
 			
 			return "redirect:/piatto/" + piatto.getId();
 			
@@ -91,11 +95,14 @@ public class IngredienteController {
 	
 	@GetMapping("/admin/piatto/{piattoId}/ingrediente/{ingredienteId}/cancella")
 	public String deleteIngrediente(@PathVariable("piattoId") Long piattoId,
-			@PathVariable("ingredienteId") Long ingredienteId) {
+			@PathVariable("ingredienteId") Long ingredienteId,
+			RedirectAttributes redirectAttributes) {
 		
 		Ingrediente ingrediente = ingredienteService.findById(ingredienteId);
 		
 		ingredienteService.delete(ingrediente);
+		
+		redirectAttributes.addFlashAttribute("successFlashMessages", "Ingrediente cancellato con successo.");
 		
 		return "redirect:/piatto/" + piattoId;
 		

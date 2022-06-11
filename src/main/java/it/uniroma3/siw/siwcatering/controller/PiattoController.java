@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.siw.siwcatering.model.Buffet;
 import it.uniroma3.siw.siwcatering.model.Piatto;
@@ -108,11 +109,14 @@ public class PiattoController {
 	
 	@GetMapping("/admin/piatto/{piattoId}/cancella")
 	public String deletePiatto(@PathVariable("piattoId") Long piattoId,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
 		
 		Piatto piatto = piattoService.findById(piattoId);
 		
 		piattoService.delete(piatto);
+		
+		redirectAttributes.addFlashAttribute("successFlashMessages", "Piatto cancellato con successo.");
 		
 		String refererUrl = request.getHeader("referer");
 		if (refererUrl.contains("/admin")) {
