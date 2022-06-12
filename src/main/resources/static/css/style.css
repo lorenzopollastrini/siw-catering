@@ -37,12 +37,72 @@ nav > a {
 	color: var(--secondary-color);
 }
 
-#main-center {
+.container-custom-main, .container-custom-form {
 	padding: 1.5rem;
 	background-color: var(--main-white-shade);
 	border-left: .1rem solid var(--secondary-color);
 	border-right: .1rem solid var(--secondary-color);
 	border-radius: 5px;
+}
+
+@media (min-width: 576px) {
+  .container-custom-main {
+    max-width: 650px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-custom-main {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-custom-main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-custom-main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-custom-main {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 576px) {
+  .container-custom-form {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-custom-form {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-custom-form {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-custom-form {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-custom-form {
+    max-width: 500px;
+  }
 }
 
 .accordion-custom .accordion-button:not(.collapsed) {

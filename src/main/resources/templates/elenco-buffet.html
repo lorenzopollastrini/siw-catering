@@ -7,30 +7,24 @@
 
 	<div th:replace="fragments/base :: header"></div>
 
-	<div class="container-fluid">
-
-		<main class="row m-3">
-			<div id="main-left" class="col-2"></div>
-			<div id="main-center" class="col-8">
-				<div class="list-group">
-					<a th:href="@{'/buffet/' + ${buffet.id}}" class="list-group-item list-group-item-action"
-						th:each="buffet : ${buffets}">
-						<div class="d-flex w-100 justify-content-between">
-							<div>
-								<span th:text="${buffet.nome}"></span>
-							</div>
-							<span th:if="${#lists.size(buffet.piatti) == 1}" class="badge bg-dark rounded-pill"
-								th:text="${#lists.size(buffet.piatti) + ' piatto'}"></span>
-							<span th:if="${#lists.size(buffet.piatti) != 1}" class="badge bg-dark rounded-pill"
-								th:text="${#lists.size(buffet.piatti) + ' piatti'}"></span>
-						</div>
-					</a>
+	<main class="container container-custom-main my-2">
+		
+		<div class="list-group">
+			<a th:href="@{'/buffet/' + ${buffet.id}}" class="list-group-item list-group-item-action"
+				th:each="buffet : ${buffets}">
+				<div class="d-flex w-100 justify-content-between">
+					<div>
+						<span th:text="${buffet.nome}"></span>
+					</div>
+					<span th:if="${#lists.size(buffet.piatti) == 1}" class="badge bg-dark rounded-pill"
+						th:text="${#lists.size(buffet.piatti) + ' piatto'}"></span>
+					<span th:if="${#lists.size(buffet.piatti) != 1}" class="badge bg-dark rounded-pill"
+						th:text="${#lists.size(buffet.piatti) + ' piatti'}"></span>
 				</div>
-			</div>
-			<div id="main-right" class="col-2"></div>
-		</main>
-
-	</div>
+			</a>
+		</div>
+		
+	</main>
 
 	<div th:replace="fragments/base :: scripts"></div>
 

@@ -6,49 +6,43 @@
 
 	<div th:replace="fragments/base :: header"></div>
 
-	<div class="container-fluid">
-
-		<main class="row m-5">
-			<div id="main-left" class="col-4"></div>
-			<div id="main-center" class="col-4">
-				<h2 class="text-center">Modifica chef</h2>
-				<br>
-				<form th:action="@{'/admin/chef/' + ${chef.id} + '/modifica'}" method="post" th:object="${chef}">
-					<div class="mb-3">
-						<label for="input-nome" class="form-label">Nome</label>
-						<input type="text" th:field="*{nome}" class="form-control form-control-custom"
-							th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}" id="input-nome" />
-						<div class="invalid-feedback">
-							<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="input-cognome" class="form-label">Cognome</label>
-						<input type="text" th:field="*{cognome}" class="form-control form-control-custom"
-							th:classappend="${#fields.hasErrors('cognome') ? 'is-invalid' : ''}" id="input-cognome" />
-						<div class="invalid-feedback">
-							<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="input-nazione" class="form-label">Nazione</label>
-						<input type="text" th:field="*{nazione}" class="form-control form-control-custom"
-							th:classappend="${#fields.hasErrors('nazione') ? 'is-invalid' : ''}" id="input-nazione" />
-						<div class="invalid-feedback">
-							<span th:if="${#fields.hasErrors('nazione')}" th:errors="*{nazione}"></span>
-						</div>
-					</div>
-					<input type="hidden" th:field="*{id}" />
-					<input type="hidden" th:field="*{buffet}" />
-					<div class="d-grid">
-						<button type="submit" class="btn btn-primary btn-primary-custom">Salva modifiche</button>
-					</div>
-				</form>
+	<main class="container container-custom-form my-2">
+		
+		<h2 class="text-center">Modifica chef</h2>
+		<br>
+		<form th:action="@{'/admin/chef/' + ${chef.id} + '/modifica'}" method="post" th:object="${chef}">
+			<div class="mb-3">
+				<label for="input-nome" class="form-label">Nome</label>
+				<input type="text" th:field="*{nome}" class="form-control form-control-custom"
+					th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}" id="input-nome" />
+				<div class="invalid-feedback">
+					<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+				</div>
 			</div>
-			<div id="main-right" class="col-4"></div>
-		</main>
-
-	</div>
+			<div class="mb-3">
+				<label for="input-cognome" class="form-label">Cognome</label>
+				<input type="text" th:field="*{cognome}" class="form-control form-control-custom"
+					th:classappend="${#fields.hasErrors('cognome') ? 'is-invalid' : ''}" id="input-cognome" />
+				<div class="invalid-feedback">
+					<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+				</div>
+			</div>
+			<div class="mb-3">
+				<label for="input-nazione" class="form-label">Nazione</label>
+				<input type="text" th:field="*{nazione}" class="form-control form-control-custom"
+					th:classappend="${#fields.hasErrors('nazione') ? 'is-invalid' : ''}" id="input-nazione" />
+				<div class="invalid-feedback">
+					<span th:if="${#fields.hasErrors('nazione')}" th:errors="*{nazione}"></span>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{buffet}" />
+			<div class="d-grid">
+				<button type="submit" class="btn btn-primary btn-primary-custom">Salva modifiche</button>
+			</div>
+		</form>
+		
+	</main>
 
 	<div th:replace="fragments/base :: scripts"></div>
 

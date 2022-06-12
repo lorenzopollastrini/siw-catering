@@ -4,48 +4,42 @@
 
 <body>
 
-	<div class="container-fluid">
-
-		<main class="row m-5">
-			<div id="main-left" class="col-4"></div>
-			<div id="main-center" class="col-4">
-				<h1 class="text-center">SIW Catering - Accedi</h1>
-				<br>
-				<div th:if="${param.error}" class="alert alert-danger" role="alert">
-					Credenziali errate.
-				</div>
-				<div th:if="${param.logout}" class="alert alert-success" role="alert">
-					Hai effettuato il logout.
-				</div>
-				<form th:action="@{/login}" method="post">
-					<div class="mb-3">
-						<label for="input-username" class="form-label">Username</label>
-						<input type="text" name="username" class="form-control form-control-custom"
-							id="input-username" />
-					</div>
-					<div class="mb-3">
-						<label for="input-password" class="form-label">Password</label>
-						<input type="password" name="password" class="form-control form-control-custom"
-							id="input-password" />
-					</div>
-					<div class="d-grid">
-						<button type="submit" class="btn btn-primary btn-primary-custom">Accedi</button>
-					</div>
-				</form>
-				<br>
-				<span>Non hai ancora un account? <a th:href="@{/register}">Registrati</a>.</span>
-				<hr class="hr-text my-4" data-content="oppure">
-				<div class="d-grid">
-					<a class="btn btn-primary btn-primary-custom" th:href="@{/oauth2/authorization/google}">
-						<i class="fa-brands fa-google"></i>
-						Accedi con Google
-					</a>
-				</div>
+	<main class="container container-custom-form my-5">
+		
+		<h1 class="text-center">SIW Catering - Accedi</h1>
+		<br>
+		<div th:if="${param.error}" class="alert alert-danger" role="alert">
+			Credenziali errate.
+		</div>
+		<div th:if="${param.logout}" class="alert alert-success" role="alert">
+			Hai effettuato il logout.
+		</div>
+		<form th:action="@{/login}" method="post">
+			<div class="mb-3">
+				<label for="input-username" class="form-label">Username</label>
+				<input type="text" name="username" class="form-control form-control-custom"
+					id="input-username" />
 			</div>
-			<div id="main-right" class="col-4"></div>
-		</main>
-
-	</div>
+			<div class="mb-3">
+				<label for="input-password" class="form-label">Password</label>
+				<input type="password" name="password" class="form-control form-control-custom"
+					id="input-password" />
+			</div>
+			<div class="d-grid">
+				<button type="submit" class="btn btn-primary btn-primary-custom">Accedi</button>
+			</div>
+		</form>
+		<br>
+		<span>Non hai ancora un account? <a th:href="@{/register}">Registrati</a>.</span>
+		<hr class="hr-text my-4" data-content="oppure">
+		<div class="d-grid">
+			<a class="btn btn-primary btn-primary-custom" th:href="@{/oauth2/authorization/google}">
+				<i class="fa-brands fa-google"></i>
+				Accedi con Google
+			</a>
+		</div>
+		
+	</main>
 
 	<div th:replace="fragments/base :: scripts"></div>
 </body>
