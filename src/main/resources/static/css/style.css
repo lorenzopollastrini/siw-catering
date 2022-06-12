@@ -106,7 +106,7 @@ nav > a {
 	border-radius: 5px;
 	font-size: 1.5rem;
 	line-height: 1rem;
-	color: var(--tertiary-color);
+	color: var(--secondary-color);
 	background-color: transparent;
 	border-color: transparent;
 }
@@ -124,13 +124,24 @@ nav > a {
 }
 
 .callout {
+	position: relative;
 	padding: 1rem;
 	margin-top: .75rem;
 	margin-bottom: .75rem;
-	border: 1px solid #e9ecef;
+	border: 1px solid var(--tertiary-color);
   	border-left-width: 1px;
 	border-left-width: .25rem;
 	border-radius: .25rem;
+}
+
+.callout h6 {
+  position: absolute;
+  top: 0;
+  font-size: 1rem;
+  line-height: 1;
+  margin: -.5rem 0 0; /* half of font-size */
+  padding: 0 .5rem;
+  background: var(--main-white-shade);
 }
 
 .description {

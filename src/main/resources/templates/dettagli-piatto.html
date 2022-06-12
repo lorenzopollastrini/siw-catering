@@ -37,22 +37,28 @@
 				</div>
 	
 				<div>
-					<!-- TODO: icona -->
-					Dal buffet <a th:text="${'&ldquo;' + piatto.buffet.nome + '&rdquo;'}"></a> dello chef <a
-						th:text="${piatto.buffet.chef.nome + ' ' + piatto.buffet.chef.cognome}"></a>
+					Dal buffet
+					&ldquo;<a th:href="@{'/buffet/' + ${piatto.buffet.id}}" th:text="${piatto.buffet.nome}"></a>&rdquo;
+					dello chef
+					<a th:href="@{'/chef/' + ${piatto.buffet.chef.id}}" th:text="${piatto.buffet.chef.nome + ' ' + piatto.buffet.chef.cognome}"></a>
 				</div>
+				
+				<br>
+				
 				<div class="callout">
+					<h6>Descrizione del piatto</h6>
 					<p class="description m-0" th:text="${piatto.descrizione}"></p>
 				</div>
-	
+				
 				<br>
 	
 				<h5>Ingredienti</h5>
 				<br>
 				<ul class="list-group list-group-flush list-group-custom">
 					<li class="list-group-item" th:each="ingrediente : ${piatto.ingredienti}">
-						<div class="d-flex justify-content-between">
+						<div class="position-relative">
 							<span th:text="${ingrediente.nome + ' (' + ingrediente.origine + ')'}"></span>
+							<p class="description m-0" th:text="${ingrediente.descrizione}"></p>
 							<div sec:authorize="hasAuthority('ADMIN')" class="dropdown dropdown-custom position-absolute top-0 end-0">
 								<button class="dropdown-button" type="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
@@ -68,7 +74,6 @@
 								</ul>
 							</div>
 						</div>
-						<p class="description m-0" th:text="${ingrediente.descrizione}"></p>
 					</li>
 				</ul>
 				

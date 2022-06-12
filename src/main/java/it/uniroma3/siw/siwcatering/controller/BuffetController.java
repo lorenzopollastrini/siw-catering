@@ -30,7 +30,7 @@ public class BuffetController {
 	@GetMapping("/buffet")
 	public String getElencoBuffet(Model model) {
 		
-		model.addAttribute("buffets", buffetService.findAll());
+		model.addAttribute("buffets", buffetService.findAllByOrderByNome());
 		
 		return "elenco-buffet";
 		

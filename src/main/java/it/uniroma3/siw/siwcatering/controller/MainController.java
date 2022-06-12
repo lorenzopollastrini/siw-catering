@@ -34,9 +34,9 @@ public class MainController {
 	@GetMapping("/admin")
 	public String adminHome(Model model) {
 		
-		Collection<Chef> chefs = chefService.findAll();
-		Collection<Buffet> buffets = buffetService.findAll();
-		Collection<Piatto> piatti = piattoService.findAll();
+		Collection<Chef> chefs = chefService.findAllByOrderByCognome();
+		Collection<Buffet> buffets = buffetService.findAllByOrderByNome();
+		Collection<Piatto> piatti = piattoService.findAllByOrderByNome();
 		
 		model.addAttribute("chefs", chefs);
 		model.addAttribute("buffets", buffets);

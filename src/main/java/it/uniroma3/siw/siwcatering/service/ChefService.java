@@ -1,6 +1,5 @@
 package it.uniroma3.siw.siwcatering.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -22,14 +21,8 @@ public class ChefService {
 		return chefRepository.save(chef);
 	}
 	
-	public Collection<Chef> findAll() {
-		
-		Collection<Chef> result = new ArrayList<>();
-		
-		chefRepository.findAll().forEach(result::add);
-		
-		return result;
-		
+	public Collection<Chef> findAllByOrderByCognome() {
+		return chefRepository.findAllByOrderByCognome();
 	}
 	
 	public Chef findById(Long id) {

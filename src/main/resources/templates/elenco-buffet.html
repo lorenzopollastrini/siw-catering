@@ -17,7 +17,6 @@
 						th:each="buffet : ${buffets}">
 						<div class="d-flex w-100 justify-content-between">
 							<div>
-								<!-- TODO: icona -->
 								<span th:text="${buffet.nome}"></span>
 							</div>
 							<span th:if="${#lists.size(buffet.piatti) == 1}" class="badge bg-dark rounded-pill"

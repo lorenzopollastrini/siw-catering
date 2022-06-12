@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.siw.siwcatering.model.Chef;
 import it.uniroma3.siw.siwcatering.service.ChefService;
@@ -25,7 +26,7 @@ public class ChefController {
 	@GetMapping("/chef")
 	public String getElencoChef(Model model) {
 		
-		Collection<Chef> chefs = chefService.findAll();
+		Collection<Chef> chefs = chefService.findAllByOrderByCognome();
 		
 		model.addAttribute("chefs", chefs);
 		
@@ -91,9 +92,12 @@ public class ChefController {
 	}
 	
 	@GetMapping("/admin/chef/{chefId}/cancella")
-	public String deleteChef(@PathVariable("chefId") Long chefId) {
+	public String deleteChef(@PathVariable("chefId") Long chefId,
+			RedirectAttributes redirectAttributes) {
 		
 		chefService.deleteById(chefId);
+		
+		redirectAttributes.addFlashAttribute("successFlashMessages", "Chef cancellato con successo.");
 		
 		return "redirect:/admin";
 		

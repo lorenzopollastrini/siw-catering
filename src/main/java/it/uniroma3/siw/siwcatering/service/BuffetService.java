@@ -1,6 +1,5 @@
 package it.uniroma3.siw.siwcatering.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -22,14 +21,8 @@ public class BuffetService {
 		return buffetRepository.save(buffet);
 	}
 	
-	public Collection<Buffet> findAll() {
-		
-		Collection<Buffet> result = new ArrayList<>();
-		
-		buffetRepository.findAll().forEach(result::add);
-		
-		return result;
-		
+	public Collection<Buffet> findAllByOrderByNome() {
+		return buffetRepository.findAllByOrderByNome();
 	}
 	
 	public Buffet findById(Long id) {

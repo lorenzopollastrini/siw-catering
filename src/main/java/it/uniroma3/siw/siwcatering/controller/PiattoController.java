@@ -30,7 +30,7 @@ public class PiattoController {
 	@GetMapping("/piatto")
 	public String getElencoPiatti(Model model) {
 		
-		model.addAttribute("piatti", piattoService.findAll());
+		model.addAttribute("piatti", piattoService.findAllByOrderByNome());
 		
 		return "elenco-piatti";
 		

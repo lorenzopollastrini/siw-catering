@@ -1,6 +1,5 @@
 package it.uniroma3.siw.siwcatering.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -22,14 +21,8 @@ public class PiattoService {
 		return piattoRepository.save(piatto);
 	}
 	
-	public Collection<Piatto> findAll() {
-		
-		Collection<Piatto> result = new ArrayList<>();
-		
-		piattoRepository.findAll().forEach(result::add);
-		
-		return result;
-		
+	public Collection<Piatto> findAllByOrderByNome() {
+		return piattoRepository.findAllByOrderByNome();
 	}
 	
 	public Piatto findById(Long id) {

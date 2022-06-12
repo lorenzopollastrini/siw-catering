@@ -37,10 +37,17 @@
 				</div>
 				
 				<div>
-					<i class="bi bi-person"></i>
-					Dello chef <a th:text="${buffet.chef.nome + ' ' + buffet.chef.cognome}"></a>
+					<i class="fa-solid fa-user"></i>
+					<span class="mx-2">
+						Dello chef
+						<a th:href="@{'/chef/' + ${buffet.chef.id}}" th:text="${buffet.chef.nome + ' ' + buffet.chef.cognome}"></a>
+					</span>
 				</div>
+				
+				<br>
+				
 				<div class="callout">
+					<h6>Descrizione del buffet</h6>
 					<p class="description m-0" th:text="${buffet.descrizione}"></p>
 				</div>
 	
