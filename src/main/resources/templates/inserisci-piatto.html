@@ -31,6 +31,15 @@
 							<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 						</div>
 					</div>
+					<div class="mb-3">
+						<label for="input-urlImmagine" class="form-label">URL immagine</label>
+						<input type="text" th:field="*{urlImmagine}" class="form-control form-control-custom"
+							th:classappend="${#fields.hasErrors('urlImmagine') ? 'is-invalid' : ''}"
+							id="input-urlImmagine" />
+						<div class="invalid-feedback">
+							<span th:if="${#fields.hasErrors('urlImmagine')}" th:errors="*{urlImmagine}"></span>
+						</div>
+					</div>
 					<div class="d-grid">
 						<button type="submit" class="btn btn-primary btn-primary-custom">Inserisci</button>
 					</div>

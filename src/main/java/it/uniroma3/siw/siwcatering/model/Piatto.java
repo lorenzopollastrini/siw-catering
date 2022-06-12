@@ -30,6 +30,8 @@ public class Piatto {
 	@Size(min = 1, max = 100)
 	private String descrizione;
 	
+	private String urlImmagine;
+	
 	@ManyToOne
 	private Buffet buffet;
 	
