@@ -31,4 +31,14 @@ public class User {
 	@Size(min = 3, max = 30)
 	private String cognome;
 	
+	public User() {
+		
+	}
+	
+	public User(String oAuthUniqueIdentifier, String nome, String cognome) {
+		this.oAuthUniqueIdentifier = oAuthUniqueIdentifier;
+		this.nome = nome;
+		this.cognome = cognome;
+	}
+	
 }

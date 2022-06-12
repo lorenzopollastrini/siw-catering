@@ -10,6 +10,8 @@ import it.uniroma3.siw.siwcatering.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
+	public Optional<User> findByoAuthUniqueIdentifier(String oAuthUniqueIdentifier);
+	
 	@Query("SELECT u FROM User u WHERE u.credentials.username = :username")
 	public Optional<User> findByUsername(@Param("username") String username);
 	

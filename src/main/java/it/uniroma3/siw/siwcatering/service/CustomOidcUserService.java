@@ -31,12 +31,9 @@ public class CustomOidcUserService extends OidcUserService {
 	private OidcUser processOidcUser(OidcUserRequest userRequest, OidcUser oidcUser) {
         GoogleUserInfo googleUserInfo = new GoogleUserInfo(oidcUser.getAttributes());
         
-        // TODO: fixare l'if
-        if (userService.findByUsername(googleUserInfo.getEmail()) == null) {
-            User user = new User();
-            user.setOAuthUniqueIdentifier(googleUserInfo.getId());
-            user.setNome(googleUserInfo.getGivenName());
-            user.setCognome(googleUserInfo.getFamilyName());
+        if (userService.findByoAuthUniqueIdentifier(googleUserInfo.getId()) == null) {
+            User user = new User(googleUserInfo.getId(), googleUserInfo.getGivenName(),
+            		googleUserInfo.getFamilyName());
 
             userService.save(user);
         }   
