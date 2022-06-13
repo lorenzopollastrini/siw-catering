@@ -46,11 +46,12 @@
 			<p class="description m-0" th:text="${piatto.descrizione}"></p>
 		</div>
 		
-		<br>
-		
-		<div>
-			<img th:src="@{${piatto.urlImmagine}}" class="img-fluid rounded">
-		</div>
+		<th:block th:if="${piatto.urlImmagine != ''}">
+			<br>
+			<div>
+				<img th:src="@{${piatto.urlImmagine}}" class="img-fluid rounded">
+			</div>
+		</th:block>
 		
 		<br>
 

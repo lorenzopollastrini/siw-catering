@@ -137,13 +137,17 @@ nav > a {
 	width: 2rem;
 }
 
+.list-group-custom .list-group-item {
+	background-color: var(--main-white-shade);
+}
+
 .form-control-custom:focus {
 	border-color: var(--secondary-color-light-1);
 	box-shadow: 0 0 0 .25rem var(--secondary-color-light-2);
 }
 
-.list-group-custom .list-group-item {
-	background-color: var(--main-white-shade);
+.textarea-descrizione {
+	height: 7rem;
 }
 
 .btn-primary-custom {

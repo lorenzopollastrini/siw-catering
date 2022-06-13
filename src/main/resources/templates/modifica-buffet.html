@@ -7,7 +7,7 @@
 	<div th:replace="fragments/base :: header"></div>
 
 	<main class="container container-custom-form my-2">
-		
+
 		<h2 class="text-center">Modifica buffet</h2>
 		<br>
 		<form th:action="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}" method="post" th:object="${buffet}">
@@ -20,10 +20,10 @@
 				</div>
 			</div>
 			<div class="mb-3">
-				<label for="input-descrizione" class="form-label">Descrizione</label>
-				<input type="text" th:field="*{descrizione}" class="form-control form-control-custom"
+				<label for="textarea-descrizione" class="form-label">Descrizione</label>
+				<textarea th:field="*{descrizione}" class="form-control form-control-custom textarea-descrizione"
 					th:classappend="${#fields.hasErrors('descrizione') ? 'is-invalid' : ''}"
-					id="input-descrizione" />
+					id="textarea-descrizione" />
 				<div class="invalid-feedback">
 					<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 				</div>
@@ -35,7 +35,7 @@
 				<button type="submit" class="btn btn-primary btn-primary-custom">Salva modifiche</button>
 			</div>
 		</form>
-		
+
 	</main>
 
 	<div th:replace="fragments/base :: scripts"></div>

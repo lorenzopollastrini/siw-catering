@@ -20,10 +20,10 @@
 				</div>
 			</div>
 			<div class="mb-3">
-				<label for="input-descrizione" class="form-label">Descrizione</label>
-				<input type="text" th:field="*{descrizione}" class="form-control form-control-custom"
+				<label for="textarea-descrizione" class="form-label">Descrizione</label>
+				<textarea th:field="*{descrizione}" class="form-control form-control-custom textarea-descrizione"
 					th:classappend="${#fields.hasErrors('descrizione') ? 'is-invalid' : ''}"
-					id="input-descrizione" />
+					id="textarea-descrizione" />
 				<div class="invalid-feedback">
 					<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 				</div>
