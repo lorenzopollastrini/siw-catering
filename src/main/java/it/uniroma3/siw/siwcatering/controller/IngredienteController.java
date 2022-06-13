@@ -82,10 +82,12 @@ public class IngredienteController {
 	public String updateIngrediente(@PathVariable("piattoId") Long piattoId,
 			@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
 			BindingResult ingredienteBindingResult,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
 		
 		if (!ingredienteBindingResult.hasErrors()) {
 			ingredienteService.save(ingrediente);
+			redirectAttributes.addFlashAttribute("successFlashMessages", "Modifiche all'ingrediente salvate.");
 			return "redirect:/piatto/" + piattoId;
 		}
 		

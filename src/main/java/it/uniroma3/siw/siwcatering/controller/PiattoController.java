@@ -96,10 +96,12 @@ public class PiattoController {
 	
 	@PostMapping("/admin/piatto/{piattoId}/modifica")
 	public String updatePiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
-			BindingResult piattoBindingResult) {
+			BindingResult piattoBindingResult,
+			RedirectAttributes redirectAttributes) {
 		
 		if (!piattoBindingResult.hasErrors()) {
 			Piatto savedPiatto = piattoService.save(piatto);
+			redirectAttributes.addFlashAttribute("successFlashMessages", "Modifiche al piatto salvate.");
 			return "redirect:/piatto/" + savedPiatto.getId();
 		}
 		

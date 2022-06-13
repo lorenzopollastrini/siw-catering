@@ -81,10 +81,12 @@ public class ChefController {
 	
 	@PostMapping("/admin/chef/{chefId}/modifica")
 	public String updateChef(@Valid @ModelAttribute("chef") Chef chef,
-			BindingResult chefBindingResult) {
+			BindingResult chefBindingResult,
+			RedirectAttributes redirectAttributes) {
 		
 		if (!chefBindingResult.hasErrors()) {
 			chefService.save(chef);
+			redirectAttributes.addFlashAttribute("successFlashMessages", "Modifiche allo chef salvate.");
 			return "redirect:/chef/" + chef.getId();
 		}
 		

@@ -96,10 +96,12 @@ public class BuffetController {
 	
 	@PostMapping("/admin/buffet/{buffetId}/modifica")
 	public String updateBuffet(@Valid @ModelAttribute("buffet") Buffet buffet,
-			BindingResult buffetBindingResult) {
+			BindingResult buffetBindingResult,
+			RedirectAttributes redirectAttributes) {
 		
 		if (!buffetBindingResult.hasErrors()) {
 			buffetService.save(buffet);
+			redirectAttributes.addFlashAttribute("successFlashMessages", "Modifiche al buffet salvate.");
 			return "redirect:/buffet/" + buffet.getId();
 		}
 		
