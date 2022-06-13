@@ -39,12 +39,13 @@
 			</span>
 		</div>
 		
-		<br>
-		
-		<div class="callout">
-			<h6>Descrizione del buffet</h6>
-			<p class="description m-0" th:text="${buffet.descrizione}"></p>
-		</div>
+		<th:block th:unless="${#strings.length(buffet.descrizione) == 0}">
+			<br>
+			<div class="callout">
+				<h6>Descrizione del buffet</h6>
+				<p class="description m-0" th:text="${buffet.descrizione}"></p>
+			</div>
+		</th:block>
 
 		<br>
 

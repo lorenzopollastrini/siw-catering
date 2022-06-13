@@ -20,10 +20,10 @@ public class Ingrediente {
 	@Size(min = 1, max = 30)
 	private String nome;
 	
-	@Size(min = 1, max = 100)
+	@Size(min = 0, max = 100)
 	private String descrizione;
 	
-	@Size(min = 1, max = 30)
+	@Size(min = 0, max = 30)
 	private String origine;
 
 }

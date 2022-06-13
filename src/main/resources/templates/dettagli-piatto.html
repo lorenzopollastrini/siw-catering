@@ -6,27 +6,25 @@
 <body>
 
 	<div th:replace="fragments/base :: header"></div>
-	
+
 	<main class="container container-custom-main my-2">
-	
-		<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert"></div>
+
+		<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert">
+		</div>
 
 		<div class="position-relative">
 			<h5 class="text-center" th:text="${piatto.nome}"></h5>
 			<div sec:authorize="hasAuthority('ADMIN')" class="dropdown dropdown-custom position-absolute top-0 end-0">
-				<button class="dropdown-button" type="button" data-bs-toggle="dropdown"
-					aria-expanded="false">
+				<button class="dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<i class="bi bi-three-dots"></i>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item"
-							th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica
+					<li><a class="dropdown-item" th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica
 							generalità</a></li>
 					<li><a class="dropdown-item"
 							th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/nuovo'}">Aggiungi
 							ingrediente</a></li>
-					<li><a class="dropdown-item"
-							th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}">Cancella</a>
+					<li><a class="dropdown-item" th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}">Cancella</a>
 					</li>
 				</ul>
 			</div>
@@ -36,23 +34,25 @@
 			Dal buffet
 			&ldquo;<a th:href="@{'/buffet/' + ${piatto.buffet.id}}" th:text="${piatto.buffet.nome}"></a>&rdquo;
 			dello chef
-			<a th:href="@{'/chef/' + ${piatto.buffet.chef.id}}" th:text="${piatto.buffet.chef.nome + ' ' + piatto.buffet.chef.cognome}"></a>
+			<a th:href="@{'/chef/' + ${piatto.buffet.chef.id}}"
+				th:text="${piatto.buffet.chef.nome + ' ' + piatto.buffet.chef.cognome}"></a>
 		</div>
-		
-		<br>
-		
-		<div class="callout">
-			<h6>Descrizione del piatto</h6>
-			<p class="description m-0" th:text="${piatto.descrizione}"></p>
-		</div>
-		
+
+		<th:block th:unless="${#strings.length(piatto.descrizione) == 0}">
+			<br>
+			<div class="callout">
+				<h6>Descrizione del piatto</h6>
+				<p class="description m-0" th:text="${piatto.descrizione}"></p>
+			</div>
+		</th:block>
+
 		<th:block th:if="${piatto.urlImmagine != ''}">
 			<br>
 			<div>
 				<img th:src="@{${piatto.urlImmagine}}" class="img-fluid rounded">
 			</div>
 		</th:block>
-		
+
 		<br>
 
 		<h5>Ingredienti</h5>
@@ -60,11 +60,14 @@
 		<ul th:unless="${#lists.isEmpty(piatto.ingredienti)}" class="list-group list-group-flush list-group-custom">
 			<li class="list-group-item" th:each="ingrediente : ${piatto.ingredienti}">
 				<div class="position-relative">
-					<span th:text="${ingrediente.nome + ' (' + ingrediente.origine + ')'}"></span>
-					<p class="description m-0" th:text="${ingrediente.descrizione}"></p>
-					<div sec:authorize="hasAuthority('ADMIN')" class="dropdown dropdown-custom position-absolute top-0 end-0">
-						<button class="dropdown-button" type="button" data-bs-toggle="dropdown"
-							aria-expanded="false">
+					<span th:text="${ingrediente.nome}"></span>
+					<span th:unless="${#strings.length(ingrediente.origine) == 0}"
+						th:text="${' (' + ingrediente.origine + ')'}"></span>
+					<p th:unless="${#strings.length(ingrediente.descrizione) == 0}" class="description m-0"
+						th:text="${ingrediente.descrizione}"></p>
+					<div sec:authorize="hasAuthority('ADMIN')"
+						class="dropdown dropdown-custom position-absolute top-0 end-0">
+						<button class="dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<i class="bi bi-three-dots"></i>
 						</button>
 						<ul class="dropdown-menu">
@@ -79,11 +82,11 @@
 				</div>
 			</li>
 		</ul>
-		
+
 		<p th:if="${#lists.isEmpty(piatto.ingredienti)}">Non è ancora stato inserito alcun ingrediente</p>
-		
+
 	</main>
-		
+
 	<div th:replace="fragments/base :: scripts"></div>
 
 </body>
