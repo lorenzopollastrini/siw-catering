@@ -21,9 +21,11 @@
 				</h2>
 				<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
 					<div class="accordion-body">
-						<a class="btn btn-dark" th:href="@{/admin/inserisci-chef}">Inserisci chef</a>
-						<br><br>
-						<ul class="list-group">
+						<div>
+							<a class="btn btn-dark" th:href="@{/admin/inserisci-chef}">Inserisci chef</a>
+						</div>
+						<br>
+						<ul th:unless="${#lists.isEmpty(chefs)}" class="list-group">
 							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
 								th:each="chef : ${chefs}">
 								<a th:href="@{'/chef/' + ${chef.id}}"
@@ -47,6 +49,7 @@
 								</div>
 							</li>
 						</ul>
+						<p th:if="${#lists.isEmpty(chefs)}">Non è ancora stato inserito alcuno chef</p>
 					</div>
 				</div>
 			</div>
@@ -59,7 +62,7 @@
 				</h2>
 				<div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
 					<div class="accordion-body">
-						<ul class="list-group">
+						<ul th:unless="${#lists.isEmpty(buffets)}" class="list-group">
 							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
 								th:each="buffet : ${buffets}">
 								<a th:href="@{'/buffet/' + ${buffet.id}}" th:text="${buffet.nome}"></a>
@@ -82,6 +85,7 @@
 								</div>
 							</li>
 						</ul>
+						<p th:if="${#lists.isEmpty(buffets)}">Non è ancora stato inserito alcun buffet</p>
 					</div>
 				</div>
 			</div>
@@ -94,7 +98,7 @@
 				</h2>
 				<div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
 					<div class="accordion-body">
-						<ul class="list-group">
+						<ul th:unless="${#lists.isEmpty(piatti)}" class="list-group">
 							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
 								th:each="piatto : ${piatti}">
 								<a th:href="@{'/piatto/' + ${piatto.id}}" th:text="${piatto.nome}"></a>
@@ -117,6 +121,7 @@
 								</div>
 							</li>
 						</ul>
+						<p th:if="${#lists.isEmpty(piatti)}">Non è ancora stato inserito alcun piatto</p>
 					</div>
 				</div>
 			</div>

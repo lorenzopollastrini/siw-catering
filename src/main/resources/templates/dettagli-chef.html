@@ -6,39 +6,36 @@
 <body>
 
 	<div th:replace="fragments/base :: header"></div>
-	
+
 	<main class="container container-custom-main my-2">
-		
-		<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert"></div>
-				
+
+		<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert">
+		</div>
+
 		<div class="position-relative">
 			<h5 class="text-center" th:text="${'Chef ' + chef.nome + ' ' + chef.cognome}"></h5>
 			<div sec:authorize="hasAuthority('ADMIN')" class="dropdown dropdown-custom position-absolute top-0 end-0">
-				<button class="dropdown-button" type="button" data-bs-toggle="dropdown"
-					aria-expanded="false">
+				<button class="dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<i class="bi bi-three-dots"></i>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item"
-							th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica
+					<li><a class="dropdown-item" th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica
 							generalità</a></li>
-					<li><a class="dropdown-item"
-							th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi
+					<li><a class="dropdown-item" th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi
 							buffet</a></li>
-					<li><a class="dropdown-item"
-							th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
+					<li><a class="dropdown-item" th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
 					</li>
 				</ul>
 			</div>
 		</div>
-		
+
 		<div>
 			<i class="bi bi-pin-map"></i>
 			<span th:text="${chef.nazione}"></span>
 		</div>
-		
+
 		<br>
-		
+
 		<ul class="nav nav-tabs nav-tabs-custom" role="tablist">
 			<li class="nav-item" role="presentation">
 				<button class="nav-link active" id="buffet-tab" data-bs-toggle="tab" data-bs-target="#buffet"
@@ -49,50 +46,57 @@
 					role="tab" aria-controls="piatti" aria-selected="false">Piatti</button>
 			</li>
 		</ul>
-		
+
 		<div class="tab-content">
-		
+
 			<div class="tab-pane fade show active p-3" id="buffet" role="tabpanel" aria-labelledby="buffet-tab">
 
-				<div class="row row-cols-1 row-cols-md-2 g-4">
+				<div th:unless="${#lists.isEmpty(chef.buffet)}" class="row row-cols-1 row-cols-md-2 g-4">
 					<div class="col" th:each="buffet : ${chef.buffet}">
 						<div class="card h-100">
 							<div class="card-body">
 								<h5 class="card-title" th:text="${buffet.nome}"></h5>
 								<p class="card-text description" th:text="${buffet.descrizione}"></p>
-								<a th:href="@{'/buffet/' + ${buffet.id}}" class="btn btn-primary btn-primary-custom">Dettagli</a>
+								<a th:href="@{'/buffet/' + ${buffet.id}}"
+									class="btn btn-primary btn-primary-custom">Dettagli</a>
 							</div>
 						</div>
 					</div>
 				</div>
 
+				<p th:if="${#lists.isEmpty(chef.buffet)}">Non è ancora stato inserito alcun buffet</p>
+
 			</div>
-			
+
 			<div class="tab-pane fade p-3" id="piatti" role="tabpanel" aria-labelledby="piatti-tab">
-				
-				<div class="row row-cols-1 row-cols-md-2 g-4">
+
+				<div th:unless="${chef.buffet.^[not #lists.isEmpty(piatti)] == null}"
+					class="row row-cols-1 row-cols-md-2 g-4">
 					<th:block th:each="buffet : ${chef.buffet}">
 						<div class="col" th:each="piatto : ${buffet.piatti}">
 							<div class="card h-100">
-								<img th:if="${piatto.urlImmagine != null}" th:src="@{${piatto.urlImmagine}}" class="card-img-top">
+								<img th:if="${piatto.urlImmagine != null}" th:src="@{${piatto.urlImmagine}}"
+									class="card-img-top">
 								<div class="card-body">
 									<h5 class="card-title" th:text="${piatto.nome}"></h5>
 									<p class="card-text description" th:text="${piatto.descrizione}"></p>
-									<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary btn-primary-custom">Dettagli</a>
+									<a th:href="@{'/piatto/' + ${piatto.id}}"
+										class="btn btn-primary btn-primary-custom">Dettagli</a>
 								</div>
 							</div>
 						</div>
 					</th:block>
 				</div>
-				
+
+				<p th:if="${chef.buffet.^[not #lists.isEmpty(piatti)] == null}">Non è ancora stato inserito alcun piatto
+				</p>
+
 			</div>
-			
+
 		</div>
-		
-		<br>
-		
+
 	</main>
-		
+
 	<div th:replace="fragments/base :: scripts"></div>
 
 </body>

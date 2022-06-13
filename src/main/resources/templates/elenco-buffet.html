@@ -8,8 +8,8 @@
 	<div th:replace="fragments/base :: header"></div>
 
 	<main class="container container-custom-main my-2">
-		
-		<div class="list-group">
+
+		<div th:unless="${#lists.isEmpty(buffets)}" class="list-group">
 			<a th:href="@{'/buffet/' + ${buffet.id}}" class="list-group-item list-group-item-action"
 				th:each="buffet : ${buffets}">
 				<div class="d-flex w-100 justify-content-between">
@@ -23,7 +23,12 @@
 				</div>
 			</a>
 		</div>
-		
+
+		<div th:if="${#lists.isEmpty(buffets)}" class="d-flex flex-column justify-content-center align-items-center">
+			<img th:src="@{/images/kitchen.png}" class="img-fluid w-50">
+			<p>Non è ancora stato inserito alcun buffet</p>
+		</div>
+
 	</main>
 
 	<div th:replace="fragments/base :: scripts"></div>

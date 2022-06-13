@@ -57,7 +57,7 @@
 
 		<h5>Ingredienti</h5>
 		<br>
-		<ul class="list-group list-group-flush list-group-custom">
+		<ul th:unless="${#lists.isEmpty(piatto.ingredienti)}" class="list-group list-group-flush list-group-custom">
 			<li class="list-group-item" th:each="ingrediente : ${piatto.ingredienti}">
 				<div class="position-relative">
 					<span th:text="${ingrediente.nome + ' (' + ingrediente.origine + ')'}"></span>
@@ -80,7 +80,7 @@
 			</li>
 		</ul>
 		
-		<br>
+		<p th:if="${#lists.isEmpty(piatto.ingredienti)}">Non è ancora stato inserito alcun ingrediente</p>
 		
 	</main>
 		
