@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<head th:replace="fragments/base :: head(title='SIW Catering - Modifica ingrediente')"></head>
+<head th:replace="fragments/base :: head(title='Modifica ingrediente')"></head>
 
 <body>
 
 	<div th:replace="fragments/base :: header"></div>
 
 	<main class="container container-custom-form my-2">
-		
+
 		<h2 class="text-center">Modifica ingrediente</h2>
 		<br>
-		<form th:action="@{'/admin/piatto/' + ${piattoId} + '/ingrediente/' + ${ingrediente.id} + '/modifica'}" method="post"
-			th:object="${ingrediente}">
+		<form th:action="@{'/admin/piatto/' + ${piattoId} + '/ingrediente/' + ${ingrediente.id} + '/modifica'}"
+			method="post" th:object="${ingrediente}">
 			<div class="mb-3">
 				<label for="input-nome" class="form-label">Nome</label>
 				<input type="text" th:field="*{nome}" class="form-control form-control-custom"
@@ -39,10 +39,10 @@
 			</div>
 			<input type="hidden" th:field="*{id}" />
 			<div class="d-grid">
-				<button type="submit" class="btn btn-primary btn-primary-custom">Salva modifiche</button>
+				<button type="submit" class="btn btn-primary btn-primary-custom" th:text="#{SAVE_CHANGES}"></button>
 			</div>
 		</form>
-		
+
 	</main>
 
 	<div th:replace="fragments/base :: scripts"></div>

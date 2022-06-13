@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 
-<head th:replace="fragments/base :: head(title='Admin Home')"></head>
+<head th:replace="fragments/base :: head(title='Home Admin')"></head>
 
 <body>
 
 	<div th:replace="fragments/base :: header"></div>
 
 	<main class="container container-custom-main my-2">
-		
-		<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert"></div>
-		
+
+		<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert">
+		</div>
+
 		<div class="accordion accordion-custom">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="headingOne">
@@ -22,14 +23,13 @@
 				<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
 					<div class="accordion-body">
 						<div>
-							<a class="btn btn-dark" th:href="@{/admin/inserisci-chef}">Inserisci chef</a>
+							<a class="btn btn-dark" th:href="@{/admin/inserisci-chef}" th:text="#{CREATE_CHEF}"></a>
 						</div>
 						<br>
 						<ul th:unless="${#lists.isEmpty(chefs)}" class="list-group">
 							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
 								th:each="chef : ${chefs}">
-								<a th:href="@{'/chef/' + ${chef.id}}"
-									th:text="${chef.nome + ' ' + chef.cognome}"></a>
+								<a th:href="@{'/chef/' + ${chef.id}}" th:text="${chef.nome + ' ' + chef.cognome}"></a>
 								<div class="dropdown dropdown-custom">
 									<button class="dropdown-button" type="button" data-bs-toggle="dropdown"
 										aria-expanded="false">
@@ -37,19 +37,20 @@
 									</button>
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}">Modifica
-												generalità</a></li>
+												th:href="@{'/admin/chef/' + ${chef.id} + '/modifica'}"
+												th:text="#{EDIT_GENERAL_INFO}"></a></li>
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}">Aggiungi
-												buffet</a></li>
+												th:href="@{'/admin/chef/' + ${chef.id} + '/buffet/nuovo'}"
+												th:text="#{CREATE_BUFFET}"></a></li>
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}">Cancella</a>
+												th:href="@{'/admin/chef/' + ${chef.id} + '/cancella'}"
+												th:text="#{DELETE}"></a>
 										</li>
 									</ul>
 								</div>
 							</li>
 						</ul>
-						<p th:if="${#lists.isEmpty(chefs)}">Non è ancora stato inserito alcuno chef</p>
+						<p th:if="${#lists.isEmpty(chefs)}" th:text="#{EMPTY_COLLECTION_CHEF}"></p>
 					</div>
 				</div>
 			</div>
@@ -73,19 +74,20 @@
 									</button>
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}">Modifica
-												generalità</a></li>
+												th:href="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}"
+												th:text="#{EDIT_GENERAL_INFO}"></a></li>
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/buffet/' + ${buffet.id} + '/piatto/nuovo'}">Aggiungi
-												piatto</a></li>
+												th:href="@{'/admin/buffet/' + ${buffet.id} + '/piatto/nuovo'}"
+												th:text="#{CREATE_PIATTO}"></a></li>
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/buffet/' + ${buffet.id} + '/cancella'}">Cancella</a>
+												th:href="@{'/admin/buffet/' + ${buffet.id} + '/cancella'}"
+												th:text="#{DELETE}"></a>
 										</li>
 									</ul>
 								</div>
 							</li>
 						</ul>
-						<p th:if="${#lists.isEmpty(buffets)}">Non è ancora stato inserito alcun buffet</p>
+						<p th:if="${#lists.isEmpty(buffets)}" th:text="#{EMPTY_COLLECTION_BUFFET}"></p>
 					</div>
 				</div>
 			</div>
@@ -109,24 +111,25 @@
 									</button>
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}">Modifica
-												generalità</a></li>
+												th:href="@{'/admin/piatto/' + ${piatto.id} + '/modifica'}"
+												th:text="#{EDIT_GENERAL_INFO}"></a></li>
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/nuovo'}">Aggiungi
-												ingrediente</a></li>
+												th:href="@{'/admin/piatto/' + ${piatto.id} + '/ingrediente/nuovo'}"
+												th:text="#{CREATE_INGREDIENTE}"></a></li>
 										<li><a class="dropdown-item"
-												th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}">Cancella</a>
+												th:href="@{'/admin/piatto/' + ${piatto.id} + '/cancella'}"
+												th:text="#{DELETE}"></a>
 										</li>
 									</ul>
 								</div>
 							</li>
 						</ul>
-						<p th:if="${#lists.isEmpty(piatti)}">Non è ancora stato inserito alcun piatto</p>
+						<p th:if="${#lists.isEmpty(piatti)}" th:text="#{EMPTY_COLLECTION_PIATTO}"></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 	</main>
 
 	<div th:replace="fragments/base :: scripts"></div>

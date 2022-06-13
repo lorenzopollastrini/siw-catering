@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<head th:replace="fragments/base :: head(title='SIW Catering - Modifica buffet')"></head>
+<head th:replace="fragments/base :: head(title='Modifica buffet')"></head>
 
 <body>
 
@@ -32,7 +32,7 @@
 			<input type="hidden" th:field="*{chef}" />
 			<input type="hidden" th:field="*{piatti}" />
 			<div class="d-grid">
-				<button type="submit" class="btn btn-primary btn-primary-custom">Salva modifiche</button>
+				<button type="submit" class="btn btn-primary btn-primary-custom" th:text="#{SAVE_CHANGES}"></button>
 			</div>
 		</form>
 
