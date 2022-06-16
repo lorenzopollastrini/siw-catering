@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +35,7 @@ public class Piatto {
 	@ManyToOne
 	private Buffet buffet;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "piatto_id")
 	private Collection<Ingrediente> ingredienti;
 	

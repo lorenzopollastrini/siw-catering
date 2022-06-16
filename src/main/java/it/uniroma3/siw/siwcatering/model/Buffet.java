@@ -32,7 +32,7 @@ public class Buffet {
 	@Size(min = 0, max = 100)
 	private String descrizione;
 	
-	@OneToMany(mappedBy = "buffet", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "buffet", cascade = CascadeType.REMOVE)
 	private Collection<Piatto> piatti;
 	
 	public void addPiatto(Piatto piatto) {
