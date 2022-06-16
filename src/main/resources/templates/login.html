@@ -8,6 +8,10 @@
 		
 		<img th:src="@{/images/siw-catering-logo.svg}" class="d-block mx-auto p-3" />
 		<br>
+		
+		<div th:each="message : ${successFlashMessages}" th:text="${message}" class="alert alert-success" role="alert">
+		</div>
+		
 		<h1>Accedi</h1>
 		<br>
 		<div th:if="${param.error}" class="alert alert-danger" role="alert">

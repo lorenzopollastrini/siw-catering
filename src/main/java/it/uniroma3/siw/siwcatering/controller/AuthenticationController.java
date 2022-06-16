@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.siw.siwcatering.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.siwcatering.model.Credentials;
@@ -42,7 +43,8 @@ public class AuthenticationController {
 	public String register(@Valid @ModelAttribute("user") User user,
 			BindingResult userBindingResult,
 			@Valid @ModelAttribute("credentials") Credentials credentials,
-			BindingResult credentialsBindingResult) {
+			BindingResult credentialsBindingResult,
+			RedirectAttributes redirectAttributes) {
 
 		credentialsValidator.validate(credentials, credentialsBindingResult);
 
@@ -51,6 +53,8 @@ public class AuthenticationController {
 			credentials.setUser(user);
 			credentials.setPassword(passwordEncoder.encode(credentials.getPassword()));
 			credentialsService.save(credentials);
+			
+			redirectAttributes.addFlashAttribute("successFlashMessages", "Registrazione effettuata.");
 
 			return "redirect:/login";
 
