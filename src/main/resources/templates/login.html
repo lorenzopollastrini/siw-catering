@@ -4,9 +4,11 @@
 
 <body>
 
-	<main class="container container-custom-form my-5">
+	<main class="container container-custom-form my-3">
 		
-		<h1 class="text-center">SIW Catering - Accedi</h1>
+		<img th:src="@{/images/siw-catering-logo.svg}" class="d-block mx-auto p-3" />
+		<br>
+		<h1>Accedi</h1>
 		<br>
 		<div th:if="${param.error}" class="alert alert-danger" role="alert">
 			Credenziali errate.
