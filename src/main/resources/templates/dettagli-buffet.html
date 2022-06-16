@@ -19,11 +19,11 @@
 				</button>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" th:href="@{'/admin/buffet/' + ${buffet.id} + '/modifica'}"
-							th:text="#{EDIT_GENERAL_INFO}"></a></li>
+							th:text="#{editGeneralInfoButtonText}"></a></li>
 					<li><a class="dropdown-item" th:href="@{'/admin/buffet/' + ${buffet.id} + '/piatto/nuovo'}"
-							th:text="#{CREATE_PIATTO}"></a></li>
+							th:text="#{piatto.createButtonText}"></a></li>
 					<li><a class="dropdown-item" th:href="@{'/admin/buffet/' + ${buffet.id} + '/cancella'}"
-							th:text="#{DELETE}"></a>
+							th:text="#{deleteButtonText}"></a>
 					</li>
 				</ul>
 			</div>
@@ -63,11 +63,11 @@
 					</p>
 				</div>
 				<a th:href="@{'/piatto/' + ${piatto.id}}" class="btn btn-primary btn-primary-custom"
-					th:text="#{VIEW_DETAILS}"></a>
+					th:text="#{viewDetailsButtonText}"></a>
 			</li>
 		</ul>
 
-		<p th:if="${#lists.isEmpty(buffet.piatti)}" th:text="#{EMPTY_COLLECTION_PIATTO}"></p>
+		<p th:if="${#lists.isEmpty(buffet.piatti)}" th:text="#{piatto.emptyCollection}"></p>
 
 	</main>
 

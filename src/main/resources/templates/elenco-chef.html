@@ -30,7 +30,7 @@
 
 		<div th:if="${#lists.isEmpty(chefs)}" class="d-flex flex-column justify-content-center align-items-center">
 			<img th:src="@{/images/kitchen.png}" class="img-fluid w-50">
-			<p th:text="#{EMPTY_COLLECTION_CHEF}"></p>
+			<p th:text="#{chef.emptyCollection}"></p>
 		</div>
 
 	</main>
